@@ -1,6 +1,6 @@
 Package: Phylogenomics_Workshop
-Type: Package
-Title: The Title of the Project
+Type: Compendium
+Title: Phylogenomics Workshop
 Version: 0.0.0.9000
 Authors@R: c(
     person(given   = "Leo-Paul",
