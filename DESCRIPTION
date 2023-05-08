@@ -1,0 +1,21 @@
+Package: Phylogenomics_Workshop
+Type: Package
+Title: The Title of the Project
+Version: 0.0.0.9000
+Authors@R: c(
+    person(given   = "Leo-Paul",
+           family  = "Dagallier",
+           role    = c("aut", "cre", "cph"),
+           email   = "leopauldagallier@gmail.com",
+           comment = c(ORCID = "0000-0002-3270-1544")))
+Description: A paragraph providing a full description of the project (on 
+    several lines...)
+URL: https://github.com/LPDagallier/Phylogenomics_Workshop
+BugReports: https://github.com/LPDagallier/Phylogenomics_Workshop/issues
+License: GPL (>= 2)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.1
+Imports: 
+    devtools,
+    here
