@@ -1,60 +1,46 @@
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# Phylogenomics\_Workshop
+# Phylogenomics Workshop
 
 <!-- badges: start -->
 
-[![License: GPL (&gt;=
+![Workshop
+Material](https://img.shields.io/badge/Workshop-Material-brightgreen)
+[![License: GPL (\>=
 2)](https://img.shields.io/badge/License-GPL%20%28%3E%3D%202%29-blue.svg)](https://choosealicense.com/licenses/gpl-2.0/)
-[![Dependencies](https://img.shields.io/badge/dependencies-2/94-green?style=flat)](#)
-<!-- badges: end -->
+![Badge last
+commit](https://img.shields.io/github/last-commit/LPDagallier/Phylogenomics_Workshop?style=flat-square)
+<!-- badges: stop -->
 
-Research Compendium of the project **{{ PLEASE ADD A FEW WORDS }}**
+Resource material for the phylogenomics workshop.
 
-### How to cite
+**TO ADD** – The presentation can be found [here](./prez.pdf)
 
-Please cite this compendium as:
+# Targeted sequencing
 
-> **{{ PLEASE ADD A CITATION }}**
+## Reads cleaning
 
-### Content
+## Sequence recovery
 
-This repository is structured as follow:
+### HybPiper 2
 
--   [`data/`](https://github.com/LPDagallier/Phylogenomics_Workshop/tree/master/data):
-    contains all raw data required to perform analyses
+### Captus
 
--   [`analyses/`](https://github.com/LPDagallier/Phylogenomics_Workshop/tree/master/analyses/):
-    contains R scripts to run each step of the workflow
+\[to be completed\]
 
--   [`outputs/`](https://github.com/LPDagallier/Phylogenomics_Workshop/tree/master/outputs):
-    contains all the results created during the workflow
+## Phylogenetic reconstruction
 
--   [`figures/`](https://github.com/LPDagallier/Phylogenomics_Workshop/tree/master/figures):
-    contains all the figures created during the workflow
+### Alignment
 
--   [`R/`](https://github.com/LPDagallier/Phylogenomics_Workshop/tree/master/R):
-    contains R functions developed especially for this project
+### Alignment trimming
 
--   [`man/`](https://github.com/LPDagallier/Phylogenomics_Workshop/tree/master/man):
-    contains help files of R functions
+### Tree estimation
 
--   [`DESCRIPTION`](https://github.com/LPDagallier/Phylogenomics_Workshop/tree/master/DESCRIPTION):
-    contains project metadata (author, date, dependencies, etc.)
+#### Gene trees approach
 
--   [`make.R`](https://github.com/LPDagallier/Phylogenomics_Workshop/tree/master/make.R):
-    main R script to run the entire project by calling each R script
-    stored in the `analyses/` folder
+#### Concatenation approach
 
-### Usage
+# Genome skimming
 
-Clone the repository, open R/RStudio and run:
-
-    source("make.R")
-
-### Notes
-
--   All required packages, listed in the `DESCRIPTION` file, will be
-    installed (if necessary)
--   All required packages and R functions will be loaded
--   Some analyses listed in the `make.R` might take time
+\[to be completed…\]
