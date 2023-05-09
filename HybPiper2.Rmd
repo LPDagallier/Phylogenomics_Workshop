@@ -12,7 +12,7 @@ HybPiper uses clean reads to create per samples assemblies and to extract the ta
 See the full [HybPiper documentation](https://github.com/mossmatters/HybPiper/wiki/Full-pipeline-parameters) for more details.
 
 ## Preparation
-After having defined the analysis unique identifier `<analysis_ID>`, and created a subfolder in the `DATA`directory (see [here](Note_for_advanced_wf.md) for details) we need:
+After having defined the analysis unique identifier `<analysis_ID>`, and created a subfolder in the `DATA`directory (see [here](Notes_for_advanced_wf.md) for details) we need:
 
 - the list of the samples to assemble (`namelist_<analysis_ID>.txt`)  
 - the clean reads for each sample (R1 and R2 .fastq)  

@@ -1,4 +1,4 @@
-Note for the advanced workflow
+Notes for the advanced workflow
 ================
 
 #### Stay tidy and organized

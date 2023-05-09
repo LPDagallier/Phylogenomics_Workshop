@@ -39,8 +39,8 @@ commands. A simple presentation of the commands for each step is given
 in the [presentation.pdf **TO ADD**]() file.
 
 Advanced workflow details, with associated commands and scripts, are
-provided on separate pages. Please read the [note for the advanced
-workflow](Note_for_advanced_wf.md) beforehand. For SLURM users,
+provided on separate pages. Please read the [notes for the advanced
+workflow](Notes_for_advanced_wf.md) beforehand. For SLURM users,
 additional .sh scripts are provided as well (to be run with `sbatch`).
 
 ## Targeted sequencing

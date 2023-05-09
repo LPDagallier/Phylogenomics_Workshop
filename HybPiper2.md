@@ -11,7 +11,7 @@ for more details.
 
 After having defined the analysis unique identifier `<analysis_ID>`, and
 created a subfolder in the `DATA`directory (see
-[here](Note_for_advanced_wf.md) for details) we need:
+[here](Notes_for_advanced_wf.md) for details) we need:
 
 - the list of the samples to assemble (`namelist_<analysis_ID>.txt`)  
 

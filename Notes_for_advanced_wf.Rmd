@@ -1,5 +1,5 @@
 ---
-title: "Note for the advanced workflow"
+title: "Notes for the advanced workflow"
 output: github_document
 ---
 
