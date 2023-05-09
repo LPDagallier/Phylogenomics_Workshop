@@ -1,0 +1,53 @@
+HybPiper 2
+================
+
+HybPiper uses clean reads to create per samples assemblies and to
+extract the targeted sequences.  
+See the full [HybPiper
+documentation](https://github.com/mossmatters/HybPiper/wiki/Full-pipeline-parameters)
+for more details.
+
+## Preparation
+
+After having defined the analysis unique identifier `<analysis_ID>`, and
+created a subfolder in the `DATA`directory (see
+[here](Note_for_advanced_wf.md) for details) we need:
+
+- the list of the samples to assemble (`namelist_<analysis_ID>.txt`)  
+
+- the clean reads for each sample (R1 and R2 .fastq)
+
+  - Insert here detaila about the input_fastq and the files_renaming
+
+- the target file
+
+- `namelist_<analysis_ID>.txt`: contains the list of samples analysed.
+  There must not be any duplicate.
+
+  - `input_fastq.txt`: contains the copy commands (`scp`) to transfer
+    the clean .fastq files from the orange storage to the working
+    directory.
+  - `files_renaming.txt`: contains the rename commands to simplify the
+    names of the clean .fastq files.
+
+## Assemble
+
+``` bash
+ssh dagallierl@hpg2.rc.ufl.edu
+cd /blue/soltis/dagallierl/DATA_ANALYSES/PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster
+sbatch hybpiper2_assemble_FMN_104811_P004.sh
+sbatch hybpiper2_assemble_no_stiched_FMN_104811_P004.sh
+```
+
+59506237 in 13:25:05 (3-06:36:05 CPU) 59615989 in 11:11:39 (2-14:17:43
+CPU)
+
+## Extract
+
+``` bash
+ssh dagallierl@hpg2.rc.ufl.edu
+cd /blue/soltis/dagallierl/DATA_ANALYSES/PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster
+sbatch hybpiper2_extract_no_stitched_FMN_104811_P004.sh
+```
+
+60195440 in 2 mins
