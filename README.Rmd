@@ -18,13 +18,16 @@ knitr::opts_chunk$set(collapse  = TRUE,
 # Phylogenomics Workshop
 
 <!-- badges: start -->
-![Workshop Material](https://img.shields.io/badge/Workshop-Material-brightgreen) [![License: GPL (>= 2)](https://img.shields.io/badge/License-GPL%20%28%3E%3D%202%29-blue.svg)](https://choosealicense.com/licenses/gpl-2.0/) ![Badge last commit](https://img.shields.io/github/last-commit/LPDagallier/Phylogenomics_Workshop?style=flat-square) 
+![Workshop Material](https://img.shields.io/badge/status-under_construction-orange)
+![Workshop Material](https://img.shields.io/badge/Workshop-Material-brightgreen) [![License: GPL (>= 2)](https://img.shields.io/badge/License-GPL%20%28%3E%3D%202%29-blue.svg)](https://choosealicense.com/licenses/gpl-2.0/) ![Badge last commit](https://img.shields.io/github/last-commit/LPDagallier/Phylogenomics_Workshop) 
 [![Project Status: Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 <!-- badges: end -->
 
+> Léo-Paul Dagallier - May 8<sup>th</sup> - 10<sup>th</sup> 2023  
+
 Resource material for the plant phylogenomics workshop.
 
-**TO ADD** -- The presentation can be found [here](./prez.pdf)
+The presentation can be found [here](./Plant_Phylogenomics_Workshop_001.pdf)
 
 To go from a set of plant specimens to a phylogenetic inference, the main steps are ordered as follow:
 
