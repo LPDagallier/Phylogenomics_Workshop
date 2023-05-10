@@ -11,20 +11,48 @@ knitr::opts_chunk$set(echo = TRUE,
 HybPiper uses clean reads to create per samples assemblies and to extract the targeted sequences.  
 See the full [HybPiper documentation](https://github.com/mossmatters/HybPiper/wiki/Full-pipeline-parameters) for more details.
 
+**EXAMPLE FILES TO PROVIDE**
+
+- `input_fastq.txt`
+- namelist_<analysis_ID>.txt
+- table of list of the samples and paths (spreadsheet)
+
 ## Preparation
-After having defined the analysis unique identifier `<analysis_ID>`, and created a subfolder in the `DATA`directory (see [here](Notes_for_advanced_wf.md) for details) we need:
+The following assumes that:  
 
-- the list of the samples to assemble (`namelist_<analysis_ID>.txt`)  
-- the clean reads for each sample (R1 and R2 .fastq)  
-  - Insert here detaila about the input_fastq and the files_renaming
-- the target file
+- We defined a unique identifier `<analysis_ID>` for the analysis and created a corresponding subfolder in the `DATA` directory (`<base_directory>/DATA_ANALYSES/PHYLOGENY_RECONSTRUCTION/DATA`; see [here](Notes_for_advanced_wf.md) for details on folder organization and analysis naming)
+- The analysis will be run in a temporary directory whose path is `path_to_tmp`
+- The output folder will be stored in `<base_directory>/DATA_ANALYSES/PHYLOGENY_RECONSTRUCTION/JOBS_OUTPUTS/`
+
+As input, HybPiper needs:
+
+- the list of the samples to analyse (`namelist_<analysis_ID>.txt`).There must not be any duplicate.  
+- the clean reads for each sample (R1 and R2 .fastq). These can be either copied manually, or you can create the following text file to batch copy the .fastq files:  
+  - `input_fastq.txt` [**ref to file**]: contains the copy commands (`scp`) to transfer the clean .fastq R1 and R2 files from their storage directory to the working directory. Each line contains a `scp`command specific to a single sample: `scp <path_to_clean_reads_storage>/Sample1_CLEAN* .`
+  - additionally you can use `files_renaming.txt` [**ref to file**] to batch rename the input .fastq files. Each line contains a `rename` command specific to a single sample: `rename -v 'Sample1_CLEAN' 'Sample1' *`  
+Note that `input_fastq.txt` and `files_renaming.txt` can be easily created using a simple spreadsheet (see [**insert ref to spreadsheet**])
+- the target file `targetfile.fasta`
+
+We assume `namelist_<analysis_ID>.txt`, `input_fastq.txt`, and `files_renaming.txt` are stored in the `DATA/<analysis_ID>` directory.
 
 
+### Define the paths and variables
 
-- `namelist_<analysis_ID>.txt`: contains the list of samples analysed. There must not be any duplicate.
-  - `input_fastq.txt`: contains the copy commands (`scp`) to transfer the clean .fastq files from the orange storage to the working directory.
-  - `files_renaming.txt`: contains the rename commands to simplify the names of the clean .fastq files.
+- for the inputs:
+```{bash}
+analysis_ID="FMN_104811_P007"
+path_to_dir_in="/blue/soltis/dagallierl/DATA_ANALYSES/PHYLOGENY_RECONSTRUCTION/DATA";
 
+path_to_ref="/blue/soltis/dagallierl/DATASETS/PHYLOGENOMICS/target_references/hybpiper_check_targetfile"
+reference_fasta_file="PROBE_SET_CLEAN_v4_prot_fixed.FAA"
+```
+
+- for the outputs:
+```{bash}
+step_ID="hybpiper2_assemble_no_stiched"
+path_to_dir_out="/blue/soltis/dagallierl/DATA_ANALYSES/PHYLOGENY_RECONSTRUCTION/JOBS_OUTPUTS/$analysis_ID"_"$step_ID"_"$SLURM_JOB_ID/";
+
+```
 
 
 ## Assemble

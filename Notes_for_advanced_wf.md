@@ -88,10 +88,10 @@ Usually, will define the **`<analysis_ID>`** that defines the set of
 samples analysed (e.g. “*Merianieae_001*”, “*Carribean_Miconia_001*”).
 Each **`<analysis_ID>`** gets its own sub-directory created in the
 `<base_directory>/DATA_ANALYSES/PHYLOGENY_RECONSTRUCTION/DATA` directory
-(see above), in which files related to this analysis (e.g. list of
-samples, list of identified paralogs, list of filtered loci) are stored
-along with some outputs (e.g. recovery statistics, inferred phylogenetic
-tree).
+(see above), in which files related to this analysis (e.g. table listing
+the samples and their paths, list of identified paralogs, list of
+filtered loci) are stored along with some outputs (e.g. recovery
+statistics, inferred phylogenetic tree).
 
 In the scripts, I will also define the **`<step_ID>`** that defines the
 specific type of analysis and parameters used

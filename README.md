@@ -41,12 +41,13 @@ The details of these steps may vary depending of the type of data
 analysed and the methods used. Here are presented the details for
 targeted sequencing data and different methods, with the associated
 commands. A simple presentation of the commands for each step is given
-in the [presentation.pdf **TO ADD**]() file.
+in the [presentation .pdf file](./Plant_Phylogenomics_Workshop_001.pdf).
 
 Advanced workflow details, with associated commands and scripts, are
-provided on separate pages. Please read the [notes for the advanced
-workflow](Notes_for_advanced_wf.md) beforehand. For SLURM users,
-additional .sh scripts are provided as well (to be run with `sbatch`).
+provided here on separate pages. Please read the [notes for the advanced
+workflow](Notes_for_advanced_wf.md). For SLURM users (cluster),
+additional .sh scripts are provided for each step (to be run with
+`sbatch`).
 
 ## Targeted sequencing
 
@@ -82,13 +83,42 @@ detailed explanation.
 HybPiper uses clean reads to create per samples assemblies and to
 extract the targeted sequences.
 
-Below is presented the basic use of HybPiper, based on their [original
-tutorial](https://github.com/mossmatters/HybPiper/wiki/Tutorial).
+:point_right: See HybPiper’s [original
+tutorial](https://github.com/mossmatters/HybPiper/wiki/Tutorial) for
+basic use.
 
-:point_right: **See [HybPiper2](HybPiper2.Rmd) for more advanced
-HybPiper workflow details**.  
+:point_right: **See [HybPiper2](HybPiper2.Rmd) for advanced HybPiper
+workflow details**.  
 (in HybPiper2: explain all the steps in Rmarkdown + provide a .sh script
 for general + script for SLURM users)
+
+### Alignment
+
+See [Alignment](Alignment.Rmd) for details.
+
+### Phylogenetic reconstruction
+
+#### Gene trees approach
+
+#### Concatenation approach
+
+## Genome skimming
+
+\[to be completed…\]
+
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+
+BELOW IS DRAFT
+
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
 
 Basically, HybPiper needs 3 inputs:  
 - clean reads for each sample (R1 and R2 .fastq)  
@@ -161,26 +191,6 @@ convenient way.
 ``` bash
 Rscript plot_hybpiper_paralog_trees.R
 ```
-
-### Alignment
-
-See [Alignment](Alignment.Rmd) for details.
-
-### Phylogenetic reconstruction
-
-#### Gene trees approach
-
-#### Concatenation approach
-
-## Genome skimming
-
-\[to be completed…\]
-
-------------------------------------------------------------------------
-
-------------------------------------------------------------------------
-
-------------------------------------------------------------------------
 
 # Sequence recovery
 
