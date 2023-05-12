@@ -8,67 +8,380 @@ knitr::opts_chunk$set(echo = TRUE,
                       eval = FALSE)
 ```
 
-HybPiper uses clean reads to create per samples assemblies and to extract the targeted sequences.  
-See the full [HybPiper documentation](https://github.com/mossmatters/HybPiper/wiki/Full-pipeline-parameters) for more details.
+HybPiper uses clean reads to create per samples assemblies and to extract the targeted sequences. See the full [HybPiper documentation](https://github.com/mossmatters/HybPiper/wiki/Full-pipeline-parameters) for more details. And see their [test dataset](https://github.com/mossmatters/HybPiper/raw/master/test_dataset.tar.gz) if you want to practice with a tutorial dataset.
+
+The workflow is divided in 2 major steps:  
+- `hybpiper assemble`: for each sample, assembles the targeted loci  
+- `hybpiper extract`: for each locus, extract the assembled sequences for the samples  
+
+The output from each step can be either stored into a same directory, or into two separate directories.  
+Here the output from each step will be stored into separate directories. The practical reason for storing them separately is that you will usually first assemble a bunch of samples (e.g. samples from a complete sequencing plate), and secondly extract the sequences from either only a subset of samples, or from different assembly runs (e.g only some samples from different sequencing plates).  
+But if you prefer, you can totally store the outputs from the `assemble` and `extract` steps into a same directory.
+
+
+The following assumes that:  
+
+- We defined a unique identifier `<analysis_ID>` for the analysed data and created a corresponding subfolder in the `DATA` directory (`<base_directory>/DATA_ANALYSES/PHYLOGENY_RECONSTRUCTION/DATA`; see [here](Notes_for_advanced_wf.md) for details on folder organization and analysis naming)
+- The analysis will be run in a temporary directory whose path is `path_to_tmp`
+- The names of the output folders are composed of the unique identifier `<analysis_ID>` and of a step identifier (`hybpiper2_assemble`, `hybpiper2_extract`, etc.). The output folders will be stored in the `<base_directory>/DATA_ANALYSES/PHYLOGENY_RECONSTRUCTION/JOBS_OUTPUTS/` directory.
+
+Note: if you are running HybPiper in local (i.e. not on a cluster), you can directly run HybPiper in the output directory (i.e temporary directory and output directory are the same).
 
 **EXAMPLE FILES TO PROVIDE**
 
 - `input_fastq.txt`
 - namelist_<analysis_ID>.txt
 - table of list of the samples and paths (spreadsheet)
+- `input_assemblies.txt`
 
-## Preparation
-The following assumes that:  
 
-- We defined a unique identifier `<analysis_ID>` for the analysis and created a corresponding subfolder in the `DATA` directory (`<base_directory>/DATA_ANALYSES/PHYLOGENY_RECONSTRUCTION/DATA`; see [here](Notes_for_advanced_wf.md) for details on folder organization and analysis naming)
-- The analysis will be run in a temporary directory whose path is `path_to_tmp`
-- The output folder will be stored in `<base_directory>/DATA_ANALYSES/PHYLOGENY_RECONSTRUCTION/JOBS_OUTPUTS/`
+## Assembly 
+
+### Preparation
 
 As input, HybPiper needs:
 
 - the list of the samples to analyse (`namelist_<analysis_ID>.txt`).There must not be any duplicate.  
-- the clean reads for each sample (R1 and R2 .fastq). These can be either copied manually, or you can create the following text file to batch copy the .fastq files:  
-  - `input_fastq.txt` [**ref to file**]: contains the copy commands (`scp`) to transfer the clean .fastq R1 and R2 files from their storage directory to the working directory. Each line contains a `scp`command specific to a single sample: `scp <path_to_clean_reads_storage>/Sample1_CLEAN* .`
-  - additionally you can use `files_renaming.txt` [**ref to file**] to batch rename the input .fastq files. Each line contains a `rename` command specific to a single sample: `rename -v 'Sample1_CLEAN' 'Sample1' *`  
-Note that `input_fastq.txt` and `files_renaming.txt` can be easily created using a simple spreadsheet (see [**insert ref to spreadsheet**])
-- the target file `targetfile.fasta`
+- the target file `targetfile.fasta`  
+- the clean reads for each sample (R1 and R2 .fastq). They can be either copied manually, or you can create the following text file to batch copy the .fastq files:  
+  - [`input_fastq.txt`](example_files/input_fastq.txt): contains the copy commands (`scp`) to transfer the clean .fastq R1 and R2 files from their storage directory to the working directory. Each line contains a `scp`command specific to a single sample, e.g. `scp <path_to_clean_reads_storage>/Sample1_CLEAN* .`
+- the .fastq file names have to match the names in `namelist_<analysis_ID>.txt`
+  - you can use [`files_renaming.txt`](example_files/files_renaming.txt) to batch rename the input .fastq files. Each line contains a `rename` command specific to a single sample, e.g. `rename -v 'Sample1_CLEAN' 'Sample1' *`
+  
+Note that `input_fastq.txt` and `files_renaming.txt` can be easily created using a simple spreadsheet (see 3 last columns in the [example spreadsheet](example_files/spreadsheet_example.xlsx))
 
-We assume `namelist_<analysis_ID>.txt`, `input_fastq.txt`, and `files_renaming.txt` are stored in the `DATA/<analysis_ID>` directory.
+`namelist_<analysis_ID>.txt`, `input_fastq.txt`, and `files_renaming.txt` are stored in the `DATA/<analysis_ID>` directory.
 
 
-### Define the paths and variables
-
+#### Define the paths and variables
 - for the inputs:
 ```{bash}
-analysis_ID="FMN_104811_P007"
-path_to_dir_in="/blue/soltis/dagallierl/DATA_ANALYSES/PHYLOGENY_RECONSTRUCTION/DATA";
+analysis_ID="my_analysis_ID"
+path_to_dir_in="<base_directory>/DATA_ANALYSES/PHYLOGENY_RECONSTRUCTION/DATA";
 
-path_to_ref="/blue/soltis/dagallierl/DATASETS/PHYLOGENOMICS/target_references/hybpiper_check_targetfile"
-reference_fasta_file="PROBE_SET_CLEAN_v4_prot_fixed.FAA"
+path_to_ref="<base_directory>/DATASETS/PHYLOGENOMICS/target_references"
+reference_fasta_file="target_reference.FAA"
 ```
 
 - for the outputs:
 ```{bash}
-step_ID="hybpiper2_assemble_no_stiched"
-path_to_dir_out="/blue/soltis/dagallierl/DATA_ANALYSES/PHYLOGENY_RECONSTRUCTION/JOBS_OUTPUTS/$analysis_ID"_"$step_ID"_"$SLURM_JOB_ID/";
-
+step_ID="hybpiper2_assemble"
+path_to_dir_out="<base_directory>/DATA_ANALYSES/PHYLOGENY_RECONSTRUCTION/JOBS_OUTPUTS/$analysis_ID"_"$step_ID"/";
 ```
 
-
-## Assemble
+- temporary directory for local users:
 ```{bash}
-ssh dagallierl@hpg2.rc.ufl.edu
-cd /blue/soltis/dagallierl/DATA_ANALYSES/PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster
-sbatch hybpiper2_assemble_FMN_104811_P004.sh
-sbatch hybpiper2_assemble_no_stiched_FMN_104811_P004.sh
+path_to_tmp=$path_to_dir_out
 ```
-59506237 in 13:25:05 (3-06:36:05 CPU)
-59615989 in 11:11:39 (2-14:17:43 CPU)
 
-## Extract
+- temporary directory for cluster users: depends on the cluster manager and its setup (please see with your cluster documentation), e.g. for SLURM on HiperGator:
 ```{bash}
-ssh dagallierl@hpg2.rc.ufl.edu
-cd /blue/soltis/dagallierl/DATA_ANALYSES/PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster
-sbatch hybpiper2_extract_no_stitched_FMN_104811_P004.sh
+path_to_tmp=$SLURM_TMPDIR
 ```
-60195440 in 2 mins
+
+#### Copy all the files in the working directory
+Go to working directory.
+```{bash}
+cd $path_to_tmp
+```
+
+Copy the reference file.
+```{bash}
+scp $path_to_ref/$reference_fasta_file $path_to_tmp
+```
+
+Copy the data related files.
+```{bash}
+scp $path_to_dir_in/$analysis_ID/namelist_$analysis_ID".txt" $path_to_tmp
+scp $path_to_dir_in/$analysis_ID/input_fastq.txt $path_to_tmp
+scp $path_to_dir_in/$analysis_ID/files_renaming.txt $path_to_tmp
+```
+
+Text files written on Windows systems have a 'carriage return' (CR, \\r) and a 'line feed' (LF, \\f) at the end of each line. This is incompatible (in some situations) with Unix-based systems (Linux and MacOS) files, that only have a LF.  
+Thus, if you wrote your text files on Windows system, you need to run to following command to make them compatible with Linux.
+```{bash}
+dos2unix *.txt
+```
+
+Copy the .fastq files, either manually or using the `input_fastq.txt` file.
+```{bash}
+sh input_fastq.txt
+```
+Each line in `input_fastq.txt` will be run at a time. To copy several samples in parallel (here, 8 in parallel), use:
+```{bash}
+parallel -j 8 < input_fastq.txt 
+```
+
+If your .fastq files are in .fastq.gz (compressed .fastq), you need to decompress them. One by one:
+```{bash}
+gunzip *.gz
+```
+
+Or in parallel:
+```{bash}
+ls *.gz | parallel -j 8 gunzip
+```
+
+Rename you .fastq files:
+```{bash}
+sh files_renaming.txt
+```
+
+### `hybpiper assemble`
+Go to working directory.
+```{bash}
+cd $path_to_tmp
+```
+
+Rename `namelist_<analysis_ID>.txt` to `namelist.txt`.
+```{bash}
+mv $path_to_tmp/namelist_$analysis_ID".txt" $path_to_tmp/namelist.txt
+```
+
+Run `hybpiper assemble`.
+```{bash}
+while read name;
+do hybpiper assemble -t_aa $reference_fasta_file -r $name*.fastq --prefix $name --cpu 8 --diamond --run_intronerate;
+done < namelist.txt
+```
+Here, the assembly is run with an amino-acid reference and the Diamond aligner. The reference has to be in amino-acids and specified with `-t_aa` (note: if target reference is in nucleotide and specified with `-t_dna`, it will automatically be translated)
+
+For the Melastomataceae probe set, I recommend to add the `--no_stitched_contig` parameter.
+
+See the [full list of parameters](https://github.com/mossmatters/HybPiper/wiki/Full-pipeline-parameters#10-hybpiper-assemble) for more details.
+
+
+### Summary statistics
+Compute the summary statistics for the exons.
+```{bash}
+hybpiper stats -t_aa $reference_fasta_file --seq_lengths_filename genes_sequences_lengths --stats_filename hybpiper_genes_statistics gene namelist.txt
+```
+
+Compute the summary statistics for the supercontigs (exons+introns).
+```{bash}
+hybpiper stats -t_aa $reference_fasta_file --seq_lengths_filename supercontigs_sequences_lengths --stats_filename hybpiper_supercontigs_statistics supercontig namelist.txt
+```
+
+Visualize the summary statistics.
+```{bash}
+hybpiper recovery_heatmap --heatmap_dpi 300 --heatmap_filetype pdf --heatmap_filename recovery_heatmap_exons genes_sequences_lengths.tsv
+hybpiper recovery_heatmap --heatmap_dpi 300 --heatmap_filetype pdf --heatmap_filename recovery_heatmap_supercontigs supercontigs_sequences_lengths.tsv
+```
+
+![heatmap example](figures/recovery_heatmap_exons_example.pdf)
+
+### Transfer to output directory
+(only in cases the temporary directory is different from the output directory)  
+
+.fastq files can take up a lot of space so you may want to remove them.
+```{bash}
+rm $path_to_tmp/*.fastq
+```
+
+Transfer the assemblies to the output directory.
+```{bash}
+mkdir $path_to_dir_out
+scp -rp $path_to_tmp/* $path_to_dir_out/
+```
+
+If your running on a cluster, remove the temporary directory with the following command (on some clusters (e.g. HiperGator), it is automatically removed at the end of the job).  
+Do not remove the temporary directory if your temporary directory and your output directory are the same (local users).
+```{bash}
+# rm -r $path_to_tmp
+```
+
+
+## Locus extraction
+### Preparation
+#### List of sample is *the same* as in the previous assembly step
+To extract the sequences for the samples you assembled in the step before, you can simply define the temporary directory as the output directory of the previous step.
+```{bash}
+path_to_assemble="<base_directory>/DATA_ANALYSES/PHYLOGENY_RECONSTRUCTION/JOBS_OUTPUTS/"$analysis_ID"_hybpiper2_assemble/";
+path_to_tmp=$path_to_assemble
+reference_fasta_file="target_reference.FAA"
+```
+
+
+#### List of sample is *different* as in the previous assembly step
+To extract the sequences for samples assembled in several different assembly runs, or for a subset of samples from the step before, you need:
+
+- a new `<analysis_ID>`, 
+- a new `namelist_<analysis_ID>.txt` with the list of samples you want to extract sequences of
+- the different assemblies of the samples you want to extract sequence of. The assemblies folder can either be copied manually, or you can create a text file to copy the assemblies folders:
+  - [`input_assemblies.txt`](example_files/input_assemblies.txt): contains the `scp` commands to transfer the folders from their respective assembly output directories to the current working directory. Each line contains a command specific to a single sample, e.g. `scp -r path_to_assembly/Sample1 .`
+  
+Similarly to `input_fastq.txt` and `files_renaming.txt`, `input_assemblies.txt` can be easily created using a simple spreadsheet.
+
+`namelist_<analysis_ID>.txt` and  `input_assemblies.txt` are stored in the `DATA/<analysis_ID>` directory.
+
+##### Define the paths and variables
+- for the inputs
+```{bash}
+analysis_ID="<new_analysis_id>"
+path_to_dir_in="<base_directory>/DATA_ANALYSES/PHYLOGENY_RECONSTRUCTION/DATA"
+
+path_to_ref="<base_directory>/DATASETS/PHYLOGENOMICS/target_references/hybpiper_check_targetfile"
+reference_fasta_file="target_reference.FAA"
+```
+
+- for the outputs
+```{bash}
+step_ID="hybpiper2_extract"
+path_to_dir_out="<base_directory>/DATA_ANALYSES/PHYLOGENY_RECONSTRUCTION/JOBS_OUTPUTS/"$analysis_ID"_"$step_ID/;
+```
+
+- temporary directory for local users
+```{bash}
+path_to_tmp=$path_to_dir_out
+```
+
+- temporary directory for cluster users depends on the cluster manager and its setup (please see with your cluster documentation), e.g. for SLURM on HiperGator:
+```{bash}
+path_to_tmp=$SLURM_TMPDIR
+```
+
+##### Copy all the files in the working directory
+Go to working directory, copy the reference file and data related files.
+```{bash}
+cd $path_to_tmp
+scp $path_to_ref/$reference_fasta_file $path_to_tmp
+scp $path_to_dir_in/$analysis_ID/namelist_$analysis_ID".txt" $path_to_tmp
+mv $path_to_tmp/namelist_$analysis_ID".txt" $path_to_tmp/namelist.txt
+scp $path_to_dir_in/$analysis_ID/input_assemblies.txt $path_to_tmp
+dos2unix *.txt
+```
+
+Copy the assemblies, either manually, or using the `input_assemblies.txt` file.
+```{bash}
+parallel -j 8 < input_assemblies.txt 
+```
+
+##### Assembly statistics
+You can re-compute the assembly statistics and plot heatmap for the samples you're focusing on. These will basically be the same than when run during the assembly step, except that they will only include the new list of samples.
+
+Compute the summary statistics for the exons and supercontigs
+```{bash}
+hybpiper stats -t_aa $reference_fasta_file --seq_lengths_filename genes_sequences_lengths --stats_filename hybpiper_genes_statistics gene namelist.txt
+hybpiper stats -t_aa $reference_fasta_file --seq_lengths_filename supercontigs_sequences_lengths --stats_filename hybpiper_supercontigs_statistics supercontig namelist.txt
+```
+
+Visualize the summary statistics.
+```{bash}
+hybpiper recovery_heatmap --heatmap_dpi 300 --heatmap_filetype pdf --heatmap_filename recovery_heatmap_exons genes_sequences_lengths.tsv
+hybpiper recovery_heatmap --heatmap_dpi 300 --heatmap_filetype pdf --heatmap_filename recovery_heatmap_supercontigs supercontigs_sequences_lengths.tsv
+```
+
+### Sequences extraction
+Go to working directory.
+```{bash}
+cd $path_to_tmp
+```
+
+To recover the exon sequences, first create a subdirectory, then run the extraction command
+```{bash}
+mkdir retrieved_exons
+hybpiper retrieve_sequences dna -t_aa $reference_fasta_file --sample_names namelist.txt --fasta_dir retrieved_exons
+```
+
+To recover the supercontigs sequences, first create a subdirectory, then run the extraction command
+```{bash}
+mkdir retrieved_supercontigs
+hybpiper retrieve_sequences supercontig -t_aa $reference_fasta_file --sample_names namelist.txt --fasta_dir retrieved_supercontigs
+```
+
+To recover the introns sequences, first create a subdirectory, then run the extraction command
+```{bash}
+mkdir retrieved_introns
+hybpiper retrieve_sequences intron -t_aa $reference_fasta_file --sample_names namelist.txt --fasta_dir retrieved_introns
+```
+
+To recover the exons sequences in amino-acids, first create a subdirectory, then run the extraction command
+```{bash}
+mkdir retrieved_aa
+hybpiper retrieve_sequences aa -t_aa $reference_fasta_file --sample_names namelist.txt --fasta_dir retrieved_aa
+```
+
+### Post-HybPiper files formatting
+The .fasta files containing the retrieved sequences have to be slightly modified to be compatible with downstream analyses. In particular, HybPiper incorporates additional informations in the sequences header that we don't need downstream.
+
+- for exons sequences
+```{bash}
+cd $path_to_tmp/retrieved_exons/
+```
+
+Create a subdirectory to contain the formatted fastas, and copy (not move) the original fastas to this subdirectory.
+```{bash}
+mkdir formatted_fastas
+cp *.FNA formatted_fastas
+```
+
+Remove empty files
+```{bash}
+cd formatted_fastas
+find . -type f -empty -delete
+```
+
+Write the sequence on a single line instead of wrapping the sequences text on several lines. New files `.FNA.oneline` are created.
+```{bash}
+ls -1 ./ | \
+while read sample; \
+do 
+	cat $sample | awk '/^>/ {printf("\n%s\n",$0);next; } { printf("%s",$0);}  END {printf("\n");}' > $sample.oneline
+done
+```
+
+Remove the `.FNA` files and rename the `.FNA.oneline` to `.FNA`.
+```{bash}
+rm *.FNA
+rename '.oneline' '' *
+```
+
+Removes everything after a space in the headers (i.e. keep only the sample name).
+```{bash}
+sed -i '/^>/s/[[:space:]].*//g' * # removes everything after a space in lines begining with >
+```
+
+Remove empty lines in the files.
+```{bash}
+sed -i '/^$/d' * #removes empty lines
+```
+
+- same for supercontigs
+```{bash}
+cd $path_to_tmp/retrieved_supercontigs/
+mkdir formatted_fastas
+cp *.fasta formatted_fastas
+cd formatted_fastas
+find . -type f -empty -delete
+ls -1 ./ | \
+while read sample; \
+do 
+	cat $sample | awk '/^>/ {printf("\n%s\n",$0);next; } { printf("%s",$0);}  END {printf("\n");}' > $sample.oneline
+done
+rm *.fasta
+rename '.fasta.oneline' '.FNA' *
+sed -i '/^>/s/[[:space:]].*//g' *
+sed -i '/^$/d' *
+```
+
+- same can be done for introns sequences and amino-acids sequences if needed.
+
+### Transfer to output directory
+(only in cases the temporary directory is different from the output directory)
+
+Transfer the extracted sesequences in their respective subdirectory to the output directory.
+```{bash}
+mkdir $path_to_dir_out
+scp -rp $path_to_tmp/* $path_to_dir_out/
+```
+
+If your running on a cluster, remove the temporary directory with the following command (on some clusters, e.g. HiperGator, it is automatically removed at the end of the job).  
+Do not remove the temporary directory if your temporary directory and your output directory are the same (local users).
+```{bash}
+# rm -r $path_to_tmp
+```
+
+
+
+
+

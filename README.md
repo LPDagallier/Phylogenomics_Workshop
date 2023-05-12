@@ -73,10 +73,11 @@ al. 2021](https://github.com/chrisjackson-pellicle/NewTargets))
 
 ### Reads cleaning
 
+\[UNDER CONSTRUCTION…\]  
 The reads obtained from the sequencing have to be cleaned before they
 can be used for downstream analysis.  
-:point_right: See the [Reads Cleaning](reads_cleaning.md) document for a
-detailed explanation.
+:point_right: See the [Reads Cleaning (TO DO)](reads_cleaning.md)
+document for a detailed explanation.
 
 ### HybPiper 2
 
@@ -87,16 +88,27 @@ extract the targeted sequences.
 tutorial](https://github.com/mossmatters/HybPiper/wiki/Tutorial) for
 basic use.
 
-:point_right: **See [HybPiper2](HybPiper2.Rmd) for advanced HybPiper
-workflow details**.  
-(in HybPiper2: explain all the steps in Rmarkdown + provide a .sh script
-for general + script for SLURM users)
+:point_right: **See [HybPiper2](HybPiper2.md) for advanced HybPiper
+workflow details**.
+
+### Paralogs assessement
+
+\[UNDER CONSTRUCTION…\]  
+See [Paralogs (TO DO)](Paralogs.md) for details.
+
+### Loci filtering
+
+\[UNDER CONSTRUCTION…\]  
+See [loci filtering (TO DO)](Loci_filtering.md) for details.
 
 ### Alignment
 
-See [Alignment](Alignment.Rmd) for details.
+\[UNDER CONSTRUCTION…\]  
+See [Alignment (TO DO)](Alignment.md) for details.
 
 ### Phylogenetic reconstruction
+
+\[UNDER CONSTRUCTION…\]
 
 #### Gene trees approach
 
@@ -104,134 +116,7 @@ See [Alignment](Alignment.Rmd) for details.
 
 ## Genome skimming
 
+\[UNDER CONSTRUCTION…\]  
 \[to be completed…\]
 
 ------------------------------------------------------------------------
-
-------------------------------------------------------------------------
-
-------------------------------------------------------------------------
-
-BELOW IS DRAFT
-
-------------------------------------------------------------------------
-
-------------------------------------------------------------------------
-
-------------------------------------------------------------------------
-
-Basically, HybPiper needs 3 inputs:  
-- clean reads for each sample (R1 and R2 .fastq)  
-- a file that contains the sequence(s) of the targeted loci
-(`targetfile.fasta`)  
-- list of the samples to assemble (`namelist.txt`)
-
-#### Assembly
-
-Assemble reads for Sample1:
-
-``` bash
-hybpiper assemble –t_dna targetfile.fasta –r Sample1*.fastq --run_intronerate
-```
-
-Loop over all the samples:
-
-``` bash
-while read name;
-do
-    hybpiper assemble -t_dna targetfile.fasta -r $name*.fastq --prefix $name --run_intronerate ; 
-done < namelist.txt
-```
-
-##### Summary statistics and plot
-
-To output the statistics tables (`genes_sequences_lengths.tsv` and
-`hybpiper_genes_statistics.tsv`):
-
-``` bash
-hybpiper stats -t_dna targetfile.fasta --seq_lengths_filename genes_sequences_lengths --stats_filename hybpiper_genes_statistics gene namelist.txt
-```
-
-To plot the recovery heatmap:
-
-``` bash
-hybpiper recovery_heatmap --heatmap_dpi 300 --heatmap_filetype pdf --heatmap_filename recovery_heatmap_exons genes_sequences_lengths.tsv
-```
-
-#### Loci extraction
-
-To extract the assembled sequences for every locus:
-
-``` bash
-mkdir retrieved_exons
-hybpiper retrieve_sequences dna -t_dna targetfile.fasta --sample_names namelist.txt --fasta_dir retrieved_exons
-```
-
-#### Paralogs identification
-
-To identify the paralogs, HybPiper will extract all the copies assembled
-for each genes when multiple copies per gene per sample where assembled.
-
-``` bash
-hybpiper paralog_retriever namelist.txt -t_dna targetfile.fasta --heatmap_filetype pdf --heatmap_dpi 300
-```
-
-Run a quick phylogenetic reconstruction of the loci to inspect for the
-multi-copies loci:
-
-``` bash
-cd paralogs_all
-cat locus1_paralogs_all.fasta | mafft --auto | FastTree -nt -gtr > locus1_paralogs_all.tre
-```
-
-Run the R script [**INSERT LINK TO SCRIPT**
-`plot_hybpiper_paralog_trees.R`]() to visualize the trees in a
-convenient way.
-
-``` bash
-Rscript plot_hybpiper_paralog_trees.R
-```
-
-# Sequence recovery
-
-## Reads cleaning
-
-## Assembly and loci extraction
-
-### Targeted sequencing
-
-#### HybPiper2
-
-#### Captus
-
-### Genome skimming
-
-# Phylogenetic reconstruction
-
-# Targeted sequencing
-
-## Reads cleaning
-
-## Sequence recovery
-
-### HybPiper 2
-
-### Captus
-
-\[to be completed\]
-
-## Phylogenetic reconstruction
-
-### Alignment
-
-### Alignment trimming
-
-### Tree estimation
-
-#### Gene trees approach
-
-#### Concatenation approach
-
-# Genome skimming
-
-\[to be completed…\]

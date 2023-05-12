@@ -8,7 +8,7 @@ knitr::opts_chunk$set(echo = TRUE,
                       eval = FALSE)
 ```
 
-#### Stay tidy and organized
+#### Staying tidy and organized
 Bioinformatic analyses can very quickly become a mess if the files and folders are not stored properly in an organized manner. Keeping things tidy and organized is good habit to have for reproducible science, and it is also a huge time saver when you will have to come back to your analyses a couple of months (or years) later because reviewer 2 asked you to redo some analysis changing this or this parameter.  
 
 There are many different ways to organize your workflow and files and folders, and the best one is surely the one you are comfortable with.  
@@ -59,7 +59,7 @@ My working directories are organized as follow:
 
 The `<base_directory>` corresponds to my local directory (on my own computer `C:\Users\<username>\Documents\RESEARCH`) **and** to my distant working directory on the cluster (e.g. `/blue/soltis/<username>`). This means that this folder organisation is duplicated (or mirrored) on both devices. With this mirror, it gets easy to stay organized with a transfer software like [WinSCP](https://sourceforge.net/projects/winscp/) or [FileZilla](https://filezilla-project.org/). For example, when I modify a `.sh` script in the *local* `SCRIPTS_cluster`, I transfer it to the *distant* `SCRIPTS_cluster` folder.
 
-#### Use unique analysis identifiers
+#### Using unique analysis identifiers
 In my workflow, I assign an unique identifier to **every** analysis I run, and write new scripts specifically for *this* analysis.
 Even if I run the same analysis just changing a single parameter, or adding an extra sample, I will have a specific working directory and specific scripts for *this and only this* analysis. This is to avoid confusion and to be able to understand what have been done, even months after having run the analysis. 
 

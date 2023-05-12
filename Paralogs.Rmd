@@ -1,0 +1,28 @@
+---
+title: "Paralogs assessement"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      eval = FALSE)
+```
+
+
+#### Paralogs identification
+To identify the paralogs, HybPiper will extract all the copies assembled for each genes when multiple copies per gene per sample where assembled.
+```{bash}
+hybpiper paralog_retriever namelist.txt -t_dna targetfile.fasta --heatmap_filetype pdf --heatmap_dpi 300
+```
+
+Run a quick phylogenetic reconstruction of the loci to inspect for the multi-copies loci:
+```{bash}
+cd paralogs_all
+cat locus1_paralogs_all.fasta | mafft --auto | FastTree -nt -gtr > locus1_paralogs_all.tre
+```
+
+Run the R script [**INSERT LINK TO SCRIPT** `plot_hybpiper_paralog_trees.R`]() to visualize the trees in a convenient way.
+```{bash}
+Rscript plot_hybpiper_paralog_trees.R
+```
+

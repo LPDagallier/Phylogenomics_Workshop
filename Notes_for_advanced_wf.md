@@ -1,7 +1,7 @@
 Notes for the advanced workflow
 ================
 
-#### Stay tidy and organized
+#### Staying tidy and organized
 
 Bioinformatic analyses can very quickly become a mess if the files and
 folders are not stored properly in an organized manner. Keeping things
@@ -74,7 +74,7 @@ transfer software like
 a `.sh` script in the *local* `SCRIPTS_cluster`, I transfer it to the
 *distant* `SCRIPTS_cluster` folder.
 
-#### Use unique analysis identifiers
+#### Using unique analysis identifiers
 
 In my workflow, I assign an unique identifier to **every** analysis I
 run, and write new scripts specifically for *this* analysis. Even if I
