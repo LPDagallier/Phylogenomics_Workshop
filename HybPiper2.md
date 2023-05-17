@@ -9,9 +9,10 @@ dataset](https://github.com/mossmatters/HybPiper/raw/master/test_dataset.tar.gz)
 if you want to practice with a tutorial dataset.
 
 The workflow is divided in 2 major steps:  
-- `hybpiper assemble`: for each sample, assembles the targeted loci  
-- `hybpiper extract`: for each locus, extract the assembled sequences
-for the samples
+- [`hybpiper assemble`](#assembly): for each sample, assembles the
+targeted loci  
+- [`hybpiper extract`](#locus-extraction): for each locus, extract the
+assembled sequences for the samples
 
 The output from each step can be either stored into a same directory, or
 into two separate directories.  
@@ -45,10 +46,9 @@ directory and output directory are the same).
 
 ## 1. Assembly
 
-:point_right: :computer: Jump directly to the [script for local
+:point_right: :computer: See the [script for local
 use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/hybpiper2_assemble.sh)  
-:point_right: :woman_technologist: Jump directly to the [script for
-cluster (SLURM)
+:point_right: :woman_technologist: See the [script for cluster (SLURM)
 use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/hybpiper2_assemble_TEMPLATE.sh).
 
 ### Preparation
@@ -266,10 +266,9 @@ your output directory are the same (local users).
 
 ## 2. Locus extraction
 
-:point_right: :computer: Jump directly to the [script for local
+:point_right: :computer: See the [script for local
 use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/hybpiper2_extract.sh)  
-:point_right: :woman_technologist: Jump directly to the [script for
-cluster (SLURM)
+:point_right: :woman_technologist: See the [script for cluster (SLURM)
 use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/hybpiper2_extract_TEMPLATE.sh).
 
 ### Preparation

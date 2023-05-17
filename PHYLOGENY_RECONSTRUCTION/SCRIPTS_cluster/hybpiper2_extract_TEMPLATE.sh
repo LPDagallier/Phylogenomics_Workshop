@@ -58,7 +58,7 @@ scp $path_to_dir_in/$analysis_ID/namelist_$analysis_ID".txt" $path_to_tmp
 mv $path_to_tmp/namelist_$analysis_ID".txt" $path_to_tmp/namelist.txt
 scp $path_to_dir_in/$analysis_ID/input_assemblies.txt $path_to_tmp
 dos2unix *.txt
-# !!! ADJUST THE -j parameter according to the number of CPUs you want to be used !!!
+# !!! ADJUST THE -j parameter according to the --cpus-per-task SLURM parameter !!!
 module load parallel
 echo "copying assemblies"
 parallel -j 8 < input_assemblies.txt 

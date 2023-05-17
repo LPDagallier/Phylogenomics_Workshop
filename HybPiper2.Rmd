@@ -11,8 +11,8 @@ knitr::opts_chunk$set(echo = TRUE,
 HybPiper uses clean reads to create per samples assemblies and to extract the targeted sequences. See the full [HybPiper documentation](https://github.com/mossmatters/HybPiper/wiki/Full-pipeline-parameters) for more details. And see their [test dataset](https://github.com/mossmatters/HybPiper/raw/master/test_dataset.tar.gz) if you want to practice with a tutorial dataset.
 
 The workflow is divided in 2 major steps:  
-- `hybpiper assemble`: for each sample, assembles the targeted loci  
-- `hybpiper extract`: for each locus, extract the assembled sequences for the samples  
+- [`hybpiper assemble`][1. Assembly]: for each sample, assembles the targeted loci  
+- [`hybpiper extract`][2. Locus extraction]: for each locus, extract the assembled sequences for the samples  
 
 The output from each step can be either stored into a same directory, or into two separate directories.  
 Here the output from each step will be stored into separate directories. The practical reason for storing them separately is that you will usually first assemble a bunch of samples (e.g. samples from a complete sequencing plate), and secondly extract the sequences from either only a subset of samples, or from different assembly runs (e.g only some samples from different sequencing plates).  
@@ -28,9 +28,9 @@ The following assumes that:
 Note: if you are running HybPiper in local (i.e. not on a cluster), you can directly run HybPiper in the output directory (i.e temporary directory and output directory are the same).
 
 
-## 1. Assembly 
-:point_right: :computer: Jump directly to the [script for local use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/hybpiper2_assemble.sh)  
-:point_right: :woman_technologist: Jump directly to the [script for cluster (SLURM) use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/hybpiper2_assemble_TEMPLATE.sh). 
+## 1. Assembly
+:point_right: :computer: See the [script for local use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/hybpiper2_assemble.sh)  
+:point_right: :woman_technologist: See the [script for cluster (SLURM) use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/hybpiper2_assemble_TEMPLATE.sh). 
 
 ### Preparation
 
@@ -187,8 +187,8 @@ Do not remove the temporary directory if your temporary directory and your outpu
 
 
 ## 2. Locus extraction
-:point_right: :computer: Jump directly to the [script for local use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/hybpiper2_extract.sh)  
-:point_right: :woman_technologist: Jump directly to the [script for cluster (SLURM) use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/hybpiper2_extract_TEMPLATE.sh). 
+:point_right: :computer: See the [script for local use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/hybpiper2_extract.sh)  
+:point_right: :woman_technologist: See the [script for cluster (SLURM) use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/hybpiper2_extract_TEMPLATE.sh). 
 
 ### Preparation
 #### List of sample is *the same* as in the previous assembly step
