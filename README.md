@@ -73,11 +73,10 @@ al. 2021](https://github.com/chrisjackson-pellicle/NewTargets))
 
 ### Reads cleaning
 
-\[UNDER CONSTRUCTION…\]  
 The reads obtained from the sequencing have to be cleaned before they
 can be used for downstream analysis.  
-:point_right: See the [Reads Cleaning (TO DO)](reads_cleaning.md)
-document for a detailed explanation.
+:point_right: See the [Reads Cleaning](Reads_cleaning.md) document for a
+detailed workflow.
 
 ### HybPiper 2
 
@@ -89,7 +88,7 @@ tutorial](https://github.com/mossmatters/HybPiper/wiki/Tutorial) for
 basic use.
 
 :point_right: **See [HybPiper2](HybPiper2.md) for advanced HybPiper
-workflow details**. Associated :computer: [scripts for local
+workflow details**, and associated :computer: [scripts for local
 use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/) and :woman_technologist:
 [scripts for cluster (SLURM)
 use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/).
