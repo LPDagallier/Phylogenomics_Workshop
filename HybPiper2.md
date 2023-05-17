@@ -9,9 +9,9 @@ dataset](https://github.com/mossmatters/HybPiper/raw/master/test_dataset.tar.gz)
 if you want to practice with a tutorial dataset.
 
 The workflow is divided in 2 major steps:  
-- [`hybpiper assemble`](#assembly): for each sample, assembles the
+- [`hybpiper assemble`](#1-assembly): for each sample, assembles the
 targeted loci  
-- [`hybpiper extract`](#locus-extraction): for each locus, extract the
+- [`hybpiper extract`](#2-locus-extraction): for each locus, extract the
 assembled sequences for the samples
 
 The output from each step can be either stored into a same directory, or
@@ -44,14 +44,14 @@ Note: if you are running HybPiper in local (i.e. not on a cluster), you
 can directly run HybPiper in the output directory (i.e temporary
 directory and output directory are the same).
 
-## 1. Assembly
+# 1 Assembly
 
 :point_right: :computer: See the [script for local
 use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/hybpiper2_assemble.sh)  
 :point_right: :woman_technologist: See the [script for cluster (SLURM)
 use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/hybpiper2_assemble_TEMPLATE.sh).
 
-### Preparation
+## 1.1 Preparation
 
 As input, HybPiper needs:
 
@@ -80,7 +80,7 @@ spreadsheet](example_files/spreadsheet_example.xlsx))
 `namelist_<analysis_ID>.txt`, `input_fastq.txt`, and
 `files_renaming.txt` are stored in the `DATA/<analysis_ID>` directory.
 
-#### Define the paths and variables
+### 1.1.1 Define the paths and variables
 
 - for the inputs:
 
@@ -113,7 +113,7 @@ path_to_tmp=$path_to_dir_out
 path_to_tmp=$SLURM_TMPDIR
 ```
 
-#### Copy all the files in the working directory
+### 1.1.2 Copy all the files in the working directory
 
 Go to working directory.
 
@@ -179,7 +179,7 @@ Rename you .fastq files:
 sh files_renaming.txt
 ```
 
-### `hybpiper assemble`
+## 1.2 `hybpiper assemble`
 
 Go to working directory.
 
@@ -213,7 +213,7 @@ See the [full list of
 parameters](https://github.com/mossmatters/HybPiper/wiki/Full-pipeline-parameters#10-hybpiper-assemble)
 for more details.
 
-### Summary statistics
+## 1.3 Summary statistics
 
 Compute the summary statistics for the exons.
 
@@ -236,7 +236,7 @@ hybpiper recovery_heatmap --heatmap_dpi 300 --heatmap_filetype pdf --heatmap_fil
 
 ![heatmap example](figures/recovery_heatmap_exons_example.pdf)
 
-### Transfer to output directory
+## 1.4 Transfer to output directory
 
 (only in cases the temporary directory is different from the output
 directory)
@@ -264,16 +264,16 @@ your output directory are the same (local users).
 # rm -r $path_to_tmp
 ```
 
-## 2. Locus extraction
+# 2 Locus extraction
 
 :point_right: :computer: See the [script for local
 use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/hybpiper2_extract.sh)  
 :point_right: :woman_technologist: See the [script for cluster (SLURM)
 use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/hybpiper2_extract_TEMPLATE.sh).
 
-### Preparation
+## 2.1 Preparation
 
-#### List of sample is *the same* as in the previous assembly step
+### 2.1.1 List of sample is *the same* as in the previous assembly step
 
 To extract the sequences for the samples you assembled in the step
 before, you can simply define the temporary directory as the output
@@ -286,7 +286,7 @@ path_to_tmp=$path_to_assemble
 reference_fasta_file="target_reference.FAA"
 ```
 
-#### List of sample is *different* as in the previous assembly step
+### 2.1.2 List of sample is *different* as in the previous assembly step
 
 To extract the sequences for samples assembled in several different
 assembly runs, or for a subset of samples from the step before, you
@@ -310,7 +310,7 @@ Similarly to `input_fastq.txt` and `files_renaming.txt`,
 `namelist_<analysis_ID>.txt` and `input_assemblies.txt` are stored in
 the `DATA/<analysis_ID>` directory.
 
-##### Define the paths and variables
+#### 2.1.2.1 Define the paths and variables
 
 - for the inputs
 
@@ -343,7 +343,7 @@ path_to_tmp=$path_to_dir_out
 path_to_tmp=$SLURM_TMPDIR
 ```
 
-##### Copy all the files in the working directory
+#### 2.1.2.2 Copy all the files in the working directory
 
 Go to working directory, copy the reference file and data related files.
 
@@ -363,7 +363,7 @@ Copy the assemblies, either manually, or using the
 parallel -j 8 < input_assemblies.txt 
 ```
 
-##### Assembly statistics
+#### 2.1.2.3 Assembly statistics
 
 You can re-compute the assembly statistics and plot heatmap for the
 samples you’re focusing on. These will basically be the same than when
@@ -384,7 +384,7 @@ hybpiper recovery_heatmap --heatmap_dpi 300 --heatmap_filetype pdf --heatmap_fil
 hybpiper recovery_heatmap --heatmap_dpi 300 --heatmap_filetype pdf --heatmap_filename recovery_heatmap_supercontigs supercontigs_sequences_lengths.tsv
 ```
 
-### Sequences extraction
+## 2.2 Sequences extraction
 
 Go to working directory.
 
@@ -424,7 +424,7 @@ mkdir retrieved_aa
 hybpiper retrieve_sequences aa -t_aa $reference_fasta_file --sample_names namelist.txt --fasta_dir retrieved_aa
 ```
 
-### Post-HybPiper files formatting
+## 2.3 Post-HybPiper files formatting
 
 The .fasta files containing the retrieved sequences have to be slightly
 modified to be compatible with downstream analyses. In particular,
@@ -505,7 +505,7 @@ sed -i '/^$/d' *
 - same can be done for introns sequences and amino-acids sequences if
   needed.
 
-### Transfer to output directory
+## 2.4 Transfer to output directory
 
 (only in cases the temporary directory is different from the output
 directory)

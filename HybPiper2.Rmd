@@ -1,6 +1,8 @@
 ---
 title: "HybPiper 2"
-output: github_document
+output:
+  github_document:
+    number_sections: true
 ---
 
 ```{r setup, include=FALSE}
@@ -11,8 +13,8 @@ knitr::opts_chunk$set(echo = TRUE,
 HybPiper uses clean reads to create per samples assemblies and to extract the targeted sequences. See the full [HybPiper documentation](https://github.com/mossmatters/HybPiper/wiki/Full-pipeline-parameters) for more details. And see their [test dataset](https://github.com/mossmatters/HybPiper/raw/master/test_dataset.tar.gz) if you want to practice with a tutorial dataset.
 
 The workflow is divided in 2 major steps:  
-- [`hybpiper assemble`][1. Assembly]: for each sample, assembles the targeted loci  
-- [`hybpiper extract`][2. Locus extraction]: for each locus, extract the assembled sequences for the samples  
+- [`hybpiper assemble`][Assembly]: for each sample, assembles the targeted loci  
+- [`hybpiper extract`][Locus extraction]: for each locus, extract the assembled sequences for the samples  
 
 The output from each step can be either stored into a same directory, or into two separate directories.  
 Here the output from each step will be stored into separate directories. The practical reason for storing them separately is that you will usually first assemble a bunch of samples (e.g. samples from a complete sequencing plate), and secondly extract the sequences from either only a subset of samples, or from different assembly runs (e.g only some samples from different sequencing plates).  
@@ -28,11 +30,11 @@ The following assumes that:
 Note: if you are running HybPiper in local (i.e. not on a cluster), you can directly run HybPiper in the output directory (i.e temporary directory and output directory are the same).
 
 
-## 1. Assembly
+# Assembly
 :point_right: :computer: See the [script for local use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/hybpiper2_assemble.sh)  
 :point_right: :woman_technologist: See the [script for cluster (SLURM) use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/hybpiper2_assemble_TEMPLATE.sh). 
 
-### Preparation
+## Preparation
 
 As input, HybPiper needs:
 
@@ -48,7 +50,7 @@ Note that `input_fastq.txt` and `files_renaming.txt` can be easily created using
 `namelist_<analysis_ID>.txt`, `input_fastq.txt`, and `files_renaming.txt` are stored in the `DATA/<analysis_ID>` directory.
 
 
-#### Define the paths and variables
+### Define the paths and variables
 - for the inputs:
 ```{bash}
 analysis_ID="my_analysis_ID"
@@ -74,7 +76,7 @@ path_to_tmp=$path_to_dir_out
 path_to_tmp=$SLURM_TMPDIR
 ```
 
-#### Copy all the files in the working directory
+### Copy all the files in the working directory
 Go to working directory.
 ```{bash}
 cd $path_to_tmp
@@ -122,7 +124,7 @@ Rename you .fastq files:
 sh files_renaming.txt
 ```
 
-### `hybpiper assemble`
+## `hybpiper assemble`
 Go to working directory.
 ```{bash}
 cd $path_to_tmp
@@ -146,7 +148,7 @@ For the Melastomataceae probe set, I recommend to add the `--no_stitched_contig`
 See the [full list of parameters](https://github.com/mossmatters/HybPiper/wiki/Full-pipeline-parameters#10-hybpiper-assemble) for more details.
 
 
-### Summary statistics
+## Summary statistics
 Compute the summary statistics for the exons.
 ```{bash}
 hybpiper stats -t_aa $reference_fasta_file --seq_lengths_filename genes_sequences_lengths --stats_filename hybpiper_genes_statistics gene namelist.txt
@@ -165,7 +167,7 @@ hybpiper recovery_heatmap --heatmap_dpi 300 --heatmap_filetype pdf --heatmap_fil
 
 ![heatmap example](figures/recovery_heatmap_exons_example.pdf)
 
-### Transfer to output directory
+## Transfer to output directory
 (only in cases the temporary directory is different from the output directory)  
 
 .fastq files can take up a lot of space so you may want to remove them.
@@ -186,12 +188,12 @@ Do not remove the temporary directory if your temporary directory and your outpu
 ```
 
 
-## 2. Locus extraction
+# Locus extraction
 :point_right: :computer: See the [script for local use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/hybpiper2_extract.sh)  
 :point_right: :woman_technologist: See the [script for cluster (SLURM) use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/hybpiper2_extract_TEMPLATE.sh). 
 
-### Preparation
-#### List of sample is *the same* as in the previous assembly step
+## Preparation
+### List of sample is *the same* as in the previous assembly step
 To extract the sequences for the samples you assembled in the step before, you can simply define the temporary directory as the output directory of the previous step.
 ```{bash}
 analysis_ID="my_analysis_ID"
@@ -201,7 +203,7 @@ reference_fasta_file="target_reference.FAA"
 ```
 
 
-#### List of sample is *different* as in the previous assembly step
+### List of sample is *different* as in the previous assembly step
 To extract the sequences for samples assembled in several different assembly runs, or for a subset of samples from the step before, you need:
 
 - a new `<analysis_ID>`, 
@@ -213,7 +215,7 @@ Similarly to `input_fastq.txt` and `files_renaming.txt`, `input_assemblies.txt` 
 
 `namelist_<analysis_ID>.txt` and  `input_assemblies.txt` are stored in the `DATA/<analysis_ID>` directory.
 
-##### Define the paths and variables
+#### Define the paths and variables
 - for the inputs
 ```{bash}
 analysis_ID="<new_analysis_id>"
@@ -239,7 +241,7 @@ path_to_tmp=$path_to_dir_out
 path_to_tmp=$SLURM_TMPDIR
 ```
 
-##### Copy all the files in the working directory
+#### Copy all the files in the working directory
 Go to working directory, copy the reference file and data related files.
 ```{bash}
 cd $path_to_tmp
@@ -255,7 +257,7 @@ Copy the assemblies, either manually, or using the `input_assemblies.txt` file.
 parallel -j 8 < input_assemblies.txt 
 ```
 
-##### Assembly statistics
+#### Assembly statistics
 You can re-compute the assembly statistics and plot heatmap for the samples you're focusing on. These will basically be the same than when run during the assembly step, except that they will only include the new list of samples.
 
 Compute the summary statistics for the exons and supercontigs
@@ -270,7 +272,7 @@ hybpiper recovery_heatmap --heatmap_dpi 300 --heatmap_filetype pdf --heatmap_fil
 hybpiper recovery_heatmap --heatmap_dpi 300 --heatmap_filetype pdf --heatmap_filename recovery_heatmap_supercontigs supercontigs_sequences_lengths.tsv
 ```
 
-### Sequences extraction
+## Sequences extraction
 Go to working directory.
 ```{bash}
 cd $path_to_tmp
@@ -300,7 +302,7 @@ mkdir retrieved_aa
 hybpiper retrieve_sequences aa -t_aa $reference_fasta_file --sample_names namelist.txt --fasta_dir retrieved_aa
 ```
 
-### Post-HybPiper files formatting
+## Post-HybPiper files formatting
 The .fasta files containing the retrieved sequences have to be slightly modified to be compatible with downstream analyses. In particular, HybPiper incorporates additional informations in the sequences header that we don't need downstream.
 
 - for exons sequences
@@ -365,7 +367,7 @@ sed -i '/^$/d' *
 
 - same can be done for introns sequences and amino-acids sequences if needed.
 
-### Transfer to output directory
+## Transfer to output directory
 (only in cases the temporary directory is different from the output directory)
 
 Transfer the extracted sequences in their respective subdirectory to the output directory.
