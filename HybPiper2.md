@@ -43,14 +43,7 @@ Note: if you are running HybPiper in local (i.e. not on a cluster), you
 can directly run HybPiper in the output directory (i.e temporary
 directory and output directory are the same).
 
-**EXAMPLE FILES TO PROVIDE**
-
-- `input_fastq.txt`
-- namelist\_<analysis_ID>.txt
-- table of list of the samples and paths (spreadsheet)
-- `input_assemblies.txt`
-
-## Assembly
+## 1. Assembly
 
 ### Preparation
 
@@ -265,7 +258,7 @@ your output directory are the same (local users).
 # rm -r $path_to_tmp
 ```
 
-## Locus extraction
+## 2. Locus extraction
 
 ### Preparation
 
@@ -276,6 +269,7 @@ before, you can simply define the temporary directory as the output
 directory of the previous step.
 
 ``` bash
+analysis_ID="my_analysis_ID"
 path_to_assemble="<base_directory>/DATA_ANALYSES/PHYLOGENY_RECONSTRUCTION/JOBS_OUTPUTS/"$analysis_ID"_hybpiper2_assemble/";
 path_to_tmp=$path_to_assemble
 reference_fasta_file="target_reference.FAA"
@@ -313,7 +307,7 @@ the `DATA/<analysis_ID>` directory.
 analysis_ID="<new_analysis_id>"
 path_to_dir_in="<base_directory>/DATA_ANALYSES/PHYLOGENY_RECONSTRUCTION/DATA"
 
-path_to_ref="<base_directory>/DATASETS/PHYLOGENOMICS/target_references/hybpiper_check_targetfile"
+path_to_ref="<base_directory>/DATASETS/PHYLOGENOMICS/target_references"
 reference_fasta_file="target_reference.FAA"
 ```
 
@@ -505,8 +499,8 @@ sed -i '/^$/d' *
 (only in cases the temporary directory is different from the output
 directory)
 
-Transfer the extracted sesequences in their respective subdirectory to
-the output directory.
+Transfer the extracted sequences in their respective subdirectory to the
+output directory.
 
 ``` bash
 mkdir $path_to_dir_out
