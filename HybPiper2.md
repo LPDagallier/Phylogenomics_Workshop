@@ -45,6 +45,12 @@ directory and output directory are the same).
 
 ## 1. Assembly
 
+:point_right: :computer: Jump directly to the [script for local
+use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/hybpiper2_assemble.sh)  
+:point_right: :woman_technologist: Jump directly to the [script for
+cluster (SLURM)
+use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/hybpiper2_assemble_TEMPLATE.sh).
+
 ### Preparation
 
 As input, HybPiper needs:
@@ -259,6 +265,12 @@ your output directory are the same (local users).
 ```
 
 ## 2. Locus extraction
+
+:point_right: :computer: Jump directly to the [script for local
+use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/hybpiper2_extract.sh)  
+:point_right: :woman_technologist: Jump directly to the [script for
+cluster (SLURM)
+use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/hybpiper2_extract_TEMPLATE.sh).
 
 ### Preparation
 

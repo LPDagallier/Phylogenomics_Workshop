@@ -89,7 +89,10 @@ tutorial](https://github.com/mossmatters/HybPiper/wiki/Tutorial) for
 basic use.
 
 :point_right: **See [HybPiper2](HybPiper2.md) for advanced HybPiper
-workflow details**.
+workflow details**. Associated :computer: [scripts for local
+use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/) and :woman_technologist:
+[scripts for cluster (SLURM)
+use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/).
 
 ### Paralogs assessement
 

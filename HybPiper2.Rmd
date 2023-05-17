@@ -29,6 +29,8 @@ Note: if you are running HybPiper in local (i.e. not on a cluster), you can dire
 
 
 ## 1. Assembly 
+:point_right: :computer: Jump directly to the [script for local use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/hybpiper2_assemble.sh)  
+:point_right: :woman_technologist: Jump directly to the [script for cluster (SLURM) use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/hybpiper2_assemble_TEMPLATE.sh). 
 
 ### Preparation
 
@@ -185,6 +187,9 @@ Do not remove the temporary directory if your temporary directory and your outpu
 
 
 ## 2. Locus extraction
+:point_right: :computer: Jump directly to the [script for local use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/hybpiper2_extract.sh)  
+:point_right: :woman_technologist: Jump directly to the [script for cluster (SLURM) use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/hybpiper2_extract_TEMPLATE.sh). 
+
 ### Preparation
 #### List of sample is *the same* as in the previous assembly step
 To extract the sequences for the samples you assembled in the step before, you can simply define the temporary directory as the output directory of the previous step.
