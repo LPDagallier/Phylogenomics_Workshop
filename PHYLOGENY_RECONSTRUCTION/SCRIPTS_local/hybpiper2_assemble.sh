@@ -91,9 +91,15 @@ echo "Starting HybPiper assemble and intronerate";
 # rename namelist.txt
 mv $path_to_tmp/namelist_$analysis_ID".txt" $path_to_tmp/namelist.txt
 
+rm hybpiper_parallel.txt
+touch hybpiper_parallel.txt
+
 while read name;
-do hybpiper assemble -t_aa $reference_fasta_file -r $name*.fastq --prefix $name --cpu 8 --diamond --run_intronerate --no_stitched_contig;
+do 
+  echo "hybpiper assemble -t_aa $reference_fasta_file -r $name*.fastq --prefix $name --cpu 2 --diamond --run_intronerate --no_stitched_contig;" >> hybpiper_parallel.txt
 done < namelist.txt
+
+parallel -j 4 < hybpiper_parallel.txt
 
 echo "Done HybPiper assemble and intronerate";
 

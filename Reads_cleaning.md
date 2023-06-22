@@ -410,8 +410,8 @@ module load R/4.1
 Rscript post_cleaning_coverage_heatmap.R
 ```
 
-The **coverage depth**: ![Heatmap coverage depth **EXAMPLE TO
-PROVIDE**](figures/coverage_depth_heatmap_example.png)
+The **coverage depth**: ![Heatmap coverage
+depth](figures/coverage_depth_heatmap_example.png)
 
 The **coverage breadth** at least 10x: ![Heatmap coverage breadth
 10x](figures/coverage_breadth_10X+_heatmap_example.png)

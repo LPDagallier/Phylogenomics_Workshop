@@ -213,6 +213,45 @@ See the [full list of
 parameters](https://github.com/mossmatters/HybPiper/wiki/Full-pipeline-parameters#10-hybpiper-assemble)
 for more details.
 
+### 1.2.1 Faster `hybpiper assemble`
+
+After different trials, I found out that running `hybpiper assemble` in
+parallel was faster. For example, on 8 CPUs, running 4
+`hybpiper assemble --cpu 2` in parallel is faster than one single
+`hybpiper assemble --cpu 8`.
+
+Initialize an empty text file that will contain all the commands to run
+in parallel.
+
+``` bash
+rm hybpiper_parallel.txt
+touch hybpiper_parallel.txt
+```
+
+Write the commands to be run in parallel in the file, 1 command per
+line.
+
+``` bash
+while read name;
+do 
+  echo "hybpiper assemble -t_aa $reference_fasta_file -r $path_to_fastq/$name"_"*.fastq --prefix $name --cpu 2 --diamond --unpaired $path_to_fastq/$name.fastq --no_stitched_contig;" >> hybpiper_parallel.txt
+done < namelist.txt
+```
+
+Run the commands in the text file on 4 parallel instances.
+
+``` bash
+parallel -j 4 < hybpiper_parallel.txt
+```
+
+As an example, running `hybpiper assemble` on 240 samples (64Gb RAM)
+took the following times:
+
+| Command                                    | CPU time        | Wall time      |
+|:-------------------------------------------|:----------------|:---------------|
+| `hybpiper assemble --cpu 8`                | 147h and 6mins  | 30h and 40mins |
+| `hybpiper assemble --cpu 2` `parallel -j4` | 147h and 16mins | 21h and 34mins |
+
 ## 1.3 Summary statistics
 
 Compute the summary statistics for the exons.

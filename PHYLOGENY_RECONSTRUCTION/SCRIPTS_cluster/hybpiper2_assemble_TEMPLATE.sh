@@ -112,9 +112,15 @@ echo "Starting HybPiper assemble and intronerate";
 
 mv $path_to_tmp/namelist_$analysis_ID".txt" $path_to_tmp/namelist.txt
 
+rm hybpiper_parallel.txt
+touch hybpiper_parallel.txt
+
 while read name;
-do hybpiper assemble -t_aa $reference_fasta_file -r $name*.fastq --prefix $name --cpu 8 --diamond --run_intronerate --no_stitched_contig;
+do 
+  echo "hybpiper assemble -t_aa $reference_fasta_file -r $name*.fastq --prefix $name --cpu 2 --diamond --run_intronerate --no_stitched_contig;" >> hybpiper_parallel.txt
 done < namelist.txt
+
+parallel -j 4 < hybpiper_parallel.txt
 
 echo "Done HybPiper assemble and intronerate";
 
@@ -130,7 +136,7 @@ echo "Starting computing summary statistics for SUPERCONTIGS";
 hybpiper stats -t_aa $reference_fasta_file --seq_lengths_filename supercontigs_sequences_lengths --stats_filename hybpiper_supercontigs_statistics supercontig namelist.txt
 echo "Done computing summary statistics";
 
-echo "Starting visualizing results with HybPiper script - might lead to bad figure";
+echo "Starting visualizing results with HybPiper script";
 hybpiper recovery_heatmap --heatmap_dpi 300 --heatmap_filetype pdf --heatmap_filename recovery_heatmap_exons genes_sequences_lengths.tsv
 hybpiper recovery_heatmap --heatmap_dpi 300 --heatmap_filetype pdf --heatmap_filename recovery_heatmap_supercontigs supercontigs_sequences_lengths.tsv
 echo "Done visualizing results";

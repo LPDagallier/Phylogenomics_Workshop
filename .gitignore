@@ -17,5 +17,6 @@
 .Renviron
 
 # User-specific files ----
-README.html
-inst/doc
+things_to_do*
+.Rbuildignore
+.gitignore
