@@ -11,18 +11,18 @@ The following assumes that:
 - The cleaning will be run in a temporary directory whose path is
   `path_to_tmp`
 
-:point_right: :computer: See directly the [script for local use **TO
-DO**](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/hybpiper2_assemble.sh)  
+:point_right: :computer: See directly the [script for local
+use](READS%20CLEANING/SCRIPTS_local/Reads_cleaning.sh)  
 :point_right: :woman_technologist: See directly the [script for cluster
-(SLURM) use **TO
-DO**](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/hybpiper2_assemble_TEMPLATE.sh),
-or jump to [Note for cluster users](#4-note-for-cluster-slurm-users).
+(SLURM)
+use](READS%20CLEANING/SCRIPTS_cluster/reads_cleaning_TEMPLATE.sh), or
+jump to [Note for cluster users](#4-note-for-cluster-slurm-users).
 
 # 1 Preparation
 
 ## 1.1 Define the paths and variables
 
-The name of the plate
+The name of the plate (or set of samples):
 
 ``` bash
 plate_to_clean="<plate_ID>"
@@ -364,8 +364,8 @@ the coverage across the reference.
 
 #### 3.2.2.3 Export the statistics and coverage plots
 
-Compute the previously explained statistics for every alignment file and
-store all these stats in a file called `mapping_statistics.csv`.
+Compute the statistics for every alignment file and store all these
+stats in a file called `mapping_statistics.csv`.
 
 ``` bash
 rm mapping_statistics.csv # remove the file in case it already exists
@@ -486,17 +486,17 @@ Once everything looks good, you can clean the `clean_reads` folder to
 keep only the .fastq.gz files.
 
 ``` bash
-cd /blue/soltis/dagallierl/DATASETS/Phylogenomics/Reads_cleaning/FMN_104811_P005/clean_reads/
+cd $path_to_dir_out/clean_reads/
 rm *.sam *.bam *.bai *.R *.fa *.txt
 ```
 
 # 4 Note for cluster (SLURM) users
 
-You can modify the [`reads_cleaning_TEMPLATE.sh` **TO
-DO**](/DATA_ANALYSES/READS_CLEANING/SCRIPTS_cluster) script:
+You can modify the
+[`reads_cleaning_TEMPLATE.sh`](READS%20CLEANING/SCRIPTS_cluster/reads_cleaning_TEMPLATE.sh)
+script:
 
-- set the correct SLURM configuration parameter (default one should be
-  ok)
+- set the correct SLURM configuration parameters
 - set the correct paths and variable names according to the plate you
   want to clean
 - read the whole script and make sure you understand all the steps (if
@@ -506,6 +506,6 @@ DO**](/DATA_ANALYSES/READS_CLEANING/SCRIPTS_cluster) script:
 ``` bash
 ssh dagallierl@hpg2.rc.ufl.edu # connect to the cluster (replace with your credentials)
 # go to your script directory on the cluster
-cd /blue/soltis/dagallierl/DATA_ANALYSES/READS_CLEANING/SCRIPTS_cluster
+cd <base_directory>/DATA_ANALYSES/READS_CLEANING/SCRIPTS_cluster
 sbatch reads_cleaning_<plate_ID>.sh
 ```
