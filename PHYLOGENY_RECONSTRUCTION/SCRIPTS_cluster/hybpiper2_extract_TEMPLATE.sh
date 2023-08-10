@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ############      SLURM CONFIGURATION      ###################
-#SBATCH --job-name=hybpiper2_assemble_no_stitched_example_analysis_01
+#SBATCH --job-name=hybpiper2_extract_no_stitched_example_analysis_01
 #SBATCH --account=<INSERT ACCOUNT e.g.: soltis>
 #SBATCH --qos=<INSERT QUEUE NAME e.g.: soltis>
 #SBATCH --cpus-per-task=8 

@@ -93,7 +93,7 @@ echo "done gunzipping files"
 
 #Renames files in order to have file names corresponding to the list in namelist.txt
 echo "renaming files"
-sh files_renaming2.txt
+sh files_renaming.txt
 echo "done renaming files"
 
 #list the file in the log file to allow checks
