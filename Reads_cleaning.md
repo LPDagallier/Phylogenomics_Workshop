@@ -1,6 +1,11 @@
 Reads Cleaning & Sequencing Statistics
 ================
 
+**Author**: [Léo-Paul Dagallier](https://github.com/LPDagallier)  
+**Last update**: 2023-08-21
+
+------------------------------------------------------------------------
+
 The reads obtained from the sequencing have to be cleaned before they
 can be used for downstream analysis.
 

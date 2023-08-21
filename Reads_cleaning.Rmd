@@ -11,6 +11,12 @@ knitr::opts_chunk$set(echo = TRUE,
                       out.width = "50%")
 ```
 
+**Author**: [Léo-Paul Dagallier](https://github.com/LPDagallier)    
+**Last update**: `r format(Sys.Date())`
+
+***
+
+
 The reads obtained from the sequencing have to be cleaned before they can be used for downstream analysis. 
 
 The following assumes that:  

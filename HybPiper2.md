@@ -1,6 +1,11 @@
 HybPiper 2
 ================
 
+**Author**: [Léo-Paul Dagallier](https://github.com/LPDagallier)  
+**Last update**: 2023-08-21
+
+------------------------------------------------------------------------
+
 HybPiper uses clean reads to create per samples assemblies and to
 extract the targeted sequences. See the full [HybPiper
 documentation](https://github.com/mossmatters/HybPiper/wiki/Full-pipeline-parameters)
@@ -98,6 +103,14 @@ reference_fasta_file="target_reference.FAA"
 step_ID="hybpiper2_assemble"
 path_to_dir_out="<base_directory>/DATA_ANALYSES/PHYLOGENY_RECONSTRUCTION/JOBS_OUTPUTS/$analysis_ID"_"$step_ID"/";
 ```
+
+**Note.** Since the release of [HybPiper
+2.1.3](https://github.com/mossmatters/HybPiper/blob/master/change_log.md),
+the parameter `--hybpiper_output` or `-o` allows you to specify a
+directory where all the `hybpiper assemble` outputs will be stored. A
+strategy can be to store all the assemblies in a same directory (easier
+if you want to use only a subset of the samples or if you want to
+combine different assembly runs).
 
 - temporary directory for local users:
 
@@ -273,7 +286,10 @@ hybpiper recovery_heatmap --heatmap_dpi 300 --heatmap_filetype pdf --heatmap_fil
 hybpiper recovery_heatmap --heatmap_dpi 300 --heatmap_filetype pdf --heatmap_filename recovery_heatmap_supercontigs supercontigs_sequences_lengths.tsv
 ```
 
-![heatmap example](figures/recovery_heatmap_exons_example.pdf)
+![heatmap example](figures/hybpiper_heatmap_lowres.PNG)
+
+([click here](figures/recovery_heatmap_exons_example.pdf) to see this
+figure in full resolution)
 
 ## 1.4 Transfer to output directory
 
@@ -312,6 +328,18 @@ use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/hybpiper2_extract_TEMPLATE.sh).
 
 ## 2.1 Preparation
 
+For extracting the loci sequences, you will usually be in 2 situations:
+
+- the list of samples you want to extract sequences for is ***the
+  same*** as the list of samples you just assembled sequences for (same
+  as previous step)
+- the list of samples you want to extract sequences for is
+  ***different*** from the list of samples you just assembled sequences
+  for (different from previous step): this can happen when you want to
+  discard samples that have poor assembly statistics, or when you want
+  to extract the sequences for samples that were assembled in 2 separate
+  assembly runs.
+
 ### 2.1.1 List of sample is *the same* as in the previous assembly step
 
 To extract the sequences for the samples you assembled in the step
@@ -348,6 +376,14 @@ Similarly to `input_fastq.txt` and `files_renaming.txt`,
 
 `namelist_<analysis_ID>.txt` and `input_assemblies.txt` are stored in
 the `DATA/<analysis_ID>` directory.
+
+**Note.** Since the release of [HybPiper
+2.1.3](https://github.com/mossmatters/HybPiper/blob/master/change_log.md),
+you can store all the assemblies outputs in a same directory thanks to
+the parameter `--hybpiper_output` or `-o`. You can then directly
+retrieve the assemblies from this directory for the extraction step
+(i.e. without copying the assemblies with `input_assemblies.txt`, which
+can be long).
 
 #### 2.1.2.1 Define the paths and variables
 
@@ -402,7 +438,7 @@ Copy the assemblies, either manually, or using the
 parallel -j 8 < input_assemblies.txt 
 ```
 
-#### 2.1.2.3 Assembly statistics
+#### 2.1.2.3 Assembly statistics (optional)
 
 You can re-compute the assembly statistics and plot heatmap for the
 samples you’re focusing on. These will basically be the same than when

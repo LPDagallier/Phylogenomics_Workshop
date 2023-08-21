@@ -17,9 +17,15 @@ commit](https://img.shields.io/github/last-commit/LPDagallier/Phylogenomics_Work
 Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 <!-- badges: end -->
 
-> Léo-Paul Dagallier - May 8<sup>th</sup> - 10<sup>th</sup> 2023
+**Author**: [Léo-Paul
+Dagallier](https://orcid.org/0000-0002-3270-1544)  
+**Last update**: 2023-08-21
 
-Resource material for the plant phylogenomics workshop.
+------------------------------------------------------------------------
+
+Resource material for the plant phylogenomics workshop led at
+[NYBG](https://www.nybg.org/science-project/a-phylogenomics-approach-to-resolving-one-of-the-worlds-most-diverse-tropical-angiosperm-radiations-melastomataceae/)
+(May 8<sup>th</sup> - 10<sup>th</sup> 2023).
 
 The presentation can be found
 [here](./Plant_Phylogenomics_Workshop_001.pdf)
@@ -95,22 +101,30 @@ use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/).
 
 ### Paralogs assessement
 
-\[UNDER CONSTRUCTION…\]  
-See [Paralogs (TO DO)](Paralogs.md) for details.
+HybPiper also allow to asses paralogy and to extract putative paralogous
+sequences.
+
+See [**Paralogs**](Paralogs.md) for details.
+
+\[:construction: UNDER CONSTRUCTION… :construction:\] :point_right: See
+also the associated :computer: [scripts for local
+use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/) and :woman_technologist:
+[scripts for cluster (SLURM)
+use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/).
 
 ### Loci filtering
 
-\[UNDER CONSTRUCTION…\]  
+\[:construction: UNDER CONSTRUCTION… :construction:\]  
 See [loci filtering (TO DO)](Loci_filtering.md) for details.
 
 ### Alignment
 
-\[UNDER CONSTRUCTION…\]  
+\[:construction: UNDER CONSTRUCTION… :construction:\]  
 See [Alignment (TO DO)](Alignment.md) for details.
 
 ### Phylogenetic reconstruction
 
-\[UNDER CONSTRUCTION…\]
+\[:construction: UNDER CONSTRUCTION… :construction:\]
 
 #### Gene trees approach
 
@@ -118,7 +132,7 @@ See [Alignment (TO DO)](Alignment.md) for details.
 
 ## Genome skimming
 
-\[UNDER CONSTRUCTION…\]  
+\[:construction: UNDER CONSTRUCTION… :construction:\]  
 \[to be completed…\]
 
 ------------------------------------------------------------------------
