@@ -2,18 +2,29 @@ Paralogs assessement
 ================
 
 **Author**: [Léo-Paul Dagallier](https://github.com/LPDagallier)  
-**Last update**: 2023-08-21
+**Last update**: 2023-08-22
 
 ------------------------------------------------------------------------
 
-#### Paralogs identification
+# Paralogs extraction
 
-To identify the paralogs, HybPiper will extract all the copies assembled
-for each genes when multiple copies per gene per sample where assembled.
+HybPiper can extract all the copies assembled for each genes when
+multiple copies per gene per sample where assembled.
 
 ``` bash
 hybpiper paralog_retriever namelist.txt -t_dna targetfile.fasta --heatmap_filetype pdf --heatmap_dpi 300
 ```
+
+It will create 2 output directories: `paralogs_all` and
+`paralogs_no_chimera`. It will also output a heatmap presenting the
+number of copy recovered per sample and per locus.
+
+\[INSERT HEATMAP EXAMPLE\]
+
+See the full details on this command
+[here](https://github.com/mossmatters/HybPiper/wiki/Paralogs).
+
+## Paralogs identification
 
 Run a quick phylogenetic reconstruction of the loci to inspect for the
 multi-copies loci:
@@ -59,8 +70,10 @@ HybPiper, and in blue are all the other copies (“.0”, “.1”, etc.).
 ![paralog tree plot example](figures/paralog_tree_plot_example.PNG)
 
 Then inspect all the trees and decide which locus present paralogy and
-should be discarded. You can store in a text file the list of the
-paralogous loci you want to discard either as a simple loci list:
+should be discarded. You can store in a text file (see example
+[here](PHYLOGENY_RECONSTRUCTION/DATA/example_analysis_01/move_paralogs.txt))
+the list of the paralogous loci you want to discard either as a simple
+loci list:
 
 ``` bash
 locus_to_move_1

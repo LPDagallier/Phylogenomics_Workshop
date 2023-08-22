@@ -19,7 +19,7 @@ Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repost
 
 **Author**: [Léo-Paul
 Dagallier](https://orcid.org/0000-0002-3270-1544)  
-**Last update**: 2023-08-21
+**Last update**: 2023-08-22
 
 ------------------------------------------------------------------------
 
@@ -94,10 +94,14 @@ tutorial](https://github.com/mossmatters/HybPiper/wiki/Tutorial) for
 basic use.
 
 :point_right: **See [HybPiper2](HybPiper2.md) for advanced HybPiper
-workflow details**, and associated :computer: [scripts for local
-use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/) and :woman_technologist:
-[scripts for cluster (SLURM)
-use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/).
+workflow details**, and associated :computer: scripts for local use
+([assembly](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/hybpiper2_assemble.sh)
+and
+[extraction](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/hybpiper2_extract.sh))
+and :woman_technologist: scripts for cluster (SLURM) use
+([assembly](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/hybpiper2_assemble_TEMPLATE.sh)
+and
+[extraction](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/hybpiper2_extract_TEMPLATE.sh)).
 
 ### Paralogs assessement
 
