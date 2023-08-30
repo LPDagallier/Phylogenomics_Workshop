@@ -29,7 +29,7 @@ reference_fasta_file="target_reference.FAA"
 
 # OUTPUTS:
 # change step_ID depending on the hybpiper parameters of this specific run
-step_ID="hybpiper2_assemble_no_stiched"
+step_ID="hybpiper2_assemblies_no_stiched"
 # OUTPUT FOLDER
 # where the ouptputs will be stored
 path_to_dir_out="<base_directory>/DATA_ANALYSES/PHYLOGENY_RECONSTRUCTION/JOBS_OUTPUTS/"$analysis_ID"_"$step_ID"/";

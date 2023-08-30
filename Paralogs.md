@@ -2,7 +2,7 @@ Paralogs assessement
 ================
 
 **Author**: [Léo-Paul Dagallier](https://github.com/LPDagallier)  
-**Last update**: 2023-08-22
+**Last update**: 2023-08-30
 
 ------------------------------------------------------------------------
 
@@ -17,11 +17,11 @@ hybpiper paralog_retriever namelist.txt -t_dna targetfile.fasta --heatmap_filety
 
 It will create 2 output directories: `paralogs_all` and
 `paralogs_no_chimera`. It will also output a heatmap presenting the
-number of copy recovered per sample and per locus.
+number of copy recovered per sample and per locus. It will also output a
+`paralog_report.tsv` whit the number of assembled copies per locus and
+per sample, as well as a heatmap.
 
-\[INSERT HEATMAP EXAMPLE\]
-
-See the full details on this command
+See the full details on this command and heatmap examples
 [here](https://github.com/mossmatters/HybPiper/wiki/Paralogs).
 
 ## Paralogs identification

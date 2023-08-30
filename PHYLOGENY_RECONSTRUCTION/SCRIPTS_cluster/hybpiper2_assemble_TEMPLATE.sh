@@ -31,7 +31,7 @@ echo "Temporary folder in which the job runs: " $SLURM_TMPDIR
 # The analyse identifier that will be used as a preffix or suffix in scripts, file names and/or folder names
 # must be unique to THIS run of analysis (that is this combination of samples, reference file, HYbPiper parameters, etc.)
 analysis_ID="example_analysis_01"
-step_ID="hybpiper2_assemble_no_stiched"
+step_ID="hybpiper2_no_stitched"
 
 # REFERENCE FILE:
 path_to_ref="<base_directory>/DATASETS/PHYLOGENOMICS/target_references"

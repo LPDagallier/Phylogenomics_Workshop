@@ -13,7 +13,7 @@
 ###################################################
 #### Set up PATHS and VARIABLES
 analysis_ID="example_analysis_01"
-path_to_assemble="<base_directory>/DATA_ANALYSES/PHYLOGENY_RECONSTRUCTION/JOBS_OUTPUTS/"$analysis_ID"_hybpiper2_assemble/";
+path_to_assemble="<base_directory>/DATA_ANALYSES/PHYLOGENY_RECONSTRUCTION/JOBS_OUTPUTS/"$analysis_ID"_hybpiper2_assemblies_no_stitched/";
 path_to_tmp=$path_to_assemble
 reference_fasta_file="target_reference.FAA"
 
