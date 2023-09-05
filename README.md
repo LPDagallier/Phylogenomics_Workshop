@@ -19,7 +19,7 @@ Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repost
 
 **Author**: [Léo-Paul
 Dagallier](https://orcid.org/0000-0002-3270-1544)  
-**Last update**: 2023-08-30
+**Last update**: 2023-09-05
 
 ------------------------------------------------------------------------
 
@@ -64,20 +64,24 @@ loci.
 
 The downstream analyses need that we use a set of target sequences.
 
-For **Melastomataceae** a probe set was designed ([Jantzen et
+#### Melastomataceae
+
+:warning: For **Melastomataceae** a probe set was designed ([Jantzen et
 al. 2020](https://bsapubs.onlinelibrary.wiley.com/doi/abs/10.1002/aps3.11345)),
 but due to several concerns, it was cleaned and updated (Dagallier &
-Michelangeli, in press.). :point_right: See the
+Michelangeli, in press.). :point_right: See
 [here](https://github.com/LPDagallier/Clean_Melasto_probe_set) for more
-details. The target files for Melastomataceae can be found
-[here](https://github.com/LPDagallier/Clean_Melasto_probe_set/tree/master/CLEAN_PROBE_SET).
-It is also recommended to remove the “outlier” loci from this probe set
-and to further [remove short
-sequences]((https://github.com/mossmatters/HybPiper/wiki/Troubleshooting,-common-issues,-and-recommendations#14-fixing-and-filtering-your-target-file)).
-The final clean probe set (outlier loci and short sequences removed) can
-be found in the present repo: [`.FNA`
+details. :point_left:
+
+From this clean and updated probe set, it is also recommended to remove
+the “outlier” loci and to further [remove short
+sequences]((https://github.com/mossmatters/HybPiper/wiki/Troubleshooting,-common-issues,-and-recommendations#14-fixing-and-filtering-your-target-file)).  
+:sparkles: The **final clean probe set** (outlier loci and short
+sequences removed) can be found in the present repo: [`.FNA`
 file](PHYLOGENY_RECONSTRUCTION/PROBE_SET_CLEAN_v5.FNA) and [`.FAA`
-file](PHYLOGENY_RECONSTRUCTION/PROBE_SET_CLEAN_v5_prot.FAA).
+file](PHYLOGENY_RECONSTRUCTION/PROBE_SET_CLEAN_v5_prot.FAA). :sparkles:
+
+#### Others
 
 For ‘universal’ probe sets, see e.g.:  
 - Angiosperm353 ([Johnson et
