@@ -2,7 +2,7 @@ Paralogs assessement
 ================
 
 **Author**: [Léo-Paul Dagallier](https://github.com/LPDagallier)  
-**Last update**: 2023-08-30
+**Last update**: 2023-09-05
 
 ------------------------------------------------------------------------
 
@@ -69,11 +69,10 @@ the same trees rooted. In orange are the “.main”copy, selected by
 HybPiper, and in blue are all the other copies (“.0”, “.1”, etc.).
 ![paralog tree plot example](figures/paralog_tree_plot_example.PNG)
 
-Then inspect all the trees and decide which locus present paralogy and
-should be discarded. You can store in a text file (see example
+Then inspect all the trees and decide which locus present paralogy. You
+can store in a text file (see example
 [here](PHYLOGENY_RECONSTRUCTION/DATA/example_analysis_01/move_paralogs.txt))
-the list of the paralogous loci you want to discard either as a simple
-loci list:
+the list of the paralogous loci either as a simple loci list:
 
 ``` bash
 locus_to_move_1
@@ -87,3 +86,39 @@ or as a list of moving commands:
 mv *locus_to_move_1* paralogs
 mv *locus_to_move_2* paralogs
 ```
+
+Using this list, you can discard the paralogous loci form the set of
+loci you will be inferring a tree. The removal step has to occur either
+before building the Astral tree (gene trees approach), or before
+concatenating the loci into a supermatrix (concatenation approach). An
+alternative to discarding the paralogous loci, is to “resolve” the
+paralogy (see below).
+
+:point_right: See also the associated :computer: [scripts for local
+use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/hybpiper2_paralogs.sh) and
+:woman_technologist: [scripts for cluster (SLURM)
+use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/hybpiper2_paralogs_TEMPLATE.sh).
+
+# Paralogy resolution - Orthology inference
+
+Instead of discarding the paralogous loci, you can undertake a paralogy
+resolution step.
+
+A **phylogenetic aware** paralogy resolution can be viewed as more
+interesting than simply removing the paralogous loci, as it allows to
+use data that would have been discarded otherwise.
+
+The [ParaGone](https://github.com/chrisjackson-pellicle/ParaGone)
+pipeline implements phylogenetic aware paralogy resolution as described
+in [Yang and Smith (2014)](https://doi.org/10.1093/molbev/msu245) and
+[Morales-Briones et al. (2021)](https://doi.org/10.1093/sysbio/syab032).
+
+Note that to run ParaGone, you need to first run the paralogy extraction
+step above (`hybpiper paralog_retriever`).
+
+:construction: More to come soon here with associated template scripts
+:construction:  
+:point_right: Feel free to check
+[this](https://github.com/chrisjackson-pellicle/ParaGone/wiki) and
+[this](https://github.com/chrisjackson-pellicle/ParaGone/wiki/Tutorial)
+out for more details. :point_left:

@@ -84,7 +84,7 @@ echo "Done visualizing results";
 #### 2. Retrieve sequences
 ####################################################
 cd $path_to_tmp
-module load hybpiper/2.1.1
+module load hybpiper/2.1.6
 
 echo "Retrieve sequences"
 

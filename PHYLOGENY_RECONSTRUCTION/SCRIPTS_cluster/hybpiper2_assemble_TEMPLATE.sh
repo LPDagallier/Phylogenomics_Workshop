@@ -101,7 +101,7 @@ echo "LIST OF THE FILES:"
 ls
 
 # load module HybPiper
-module load hybpiper/2.1.1
+module load hybpiper/2.1.6
 
 ###################################################
 #### 2. HybPiper assemble & intronerate

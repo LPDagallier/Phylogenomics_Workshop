@@ -115,19 +115,31 @@ and :woman_technologist: scripts for cluster (SLURM) use
 and
 [extraction](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/hybpiper2_extract_TEMPLATE.sh)).
 
-### Paralogs assessement
+### Paralogs assessement and resolution
 
 HybPiper also allow to asses paralogy and to extract putative paralogous
-sequences.
+sequences. Then you can either assess the putative paralogs one by one
+and decide if these should be discarded, or use
+[ParaGone](https://github.com/chrisjackson-pellicle/ParaGone) to run a
+**phylogenetic aware** paralogy resolution step.
 
-See [**Paralogs**](Paralogs.md) for details.
+See [**Paralogs document**](Paralogs.md) for more details.
 
-:point_right: See also the associated :computer: [scripts for local
-use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/hybpiper2_paralogs.sh)
+##### Paralogy assessement with HybPiper
 
-\[:construction: UNDER CONSTRUCTION… :construction:\] and
+:point_right: See the associated :computer: [scripts for local
+use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/hybpiper2_paralogs.sh) and
 :woman_technologist: [scripts for cluster (SLURM)
-use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/).
+use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/hybpiper2_paralogs_TEMPLATE.sh).
+
+##### \> Paralogy resolution with ParaGone
+
+:construction: :construction: :construction:  
+:point_right: See the associated :computer: [scripts for local
+use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/hybpiper2_paralogs.sh) and
+:woman_technologist: [scripts for cluster (SLURM)
+use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/hybpiper2_paralogs_TEMPLATE.sh).
+:construction: :construction: :construction:
 
 ### Loci filtering
 
