@@ -174,8 +174,6 @@ trees reconstruction step.
 
 ### Alignment
 
-\[:construction: UNDER CONSTRUCTION… :construction:\]
-
 After extracting the sequences (exons, supercontigs or multicopies
 exons), we need to align them.
 
@@ -187,11 +185,47 @@ to align, but other program do exist
 [MACSE](https://www.agap-ge2pop.org/macse/?menu=releases)).
 
 Sequences can be aligned “naively” or informed by the locus reference
-sequence. As a rule of thumb, I would advise to align with the locus
-reference sequence, because it is conceptually less prone to alignment
-errors.
+sequence. I would advise to align with the locus reference sequence,
+because it is conceptually less prone to alignment errors.
 
-See [Alignment](Alignment.md) for details on the alignment steps.
+Several programs exist to do so, such as
+[ClipKIT](https://jlsteenwyk.com/ClipKIT/index.html),
+[TrimAl](http://trimal.cgenomics.org/trimal) or
+[Gblocks](https://home.cc.umanitoba.ca/~psgendb/doc/Castresana/Gblocks_documentation.html).
+These programs usually trim the alignments based on the quality of the
+alignment at a given position. Other approaches such as
+[HmmCleaner](https://bioinformaticshome.com/tools/msa/descriptions/HmmCleaner.html)
+remove poorly aligned regions on a sequence by sequence basis. Both
+approaches can be combined.
+
+Here I present alignment trimming with both ClipKIT and TrimAl.
+
+See [Alignment](Alignment.md) for details on the alignment and trimming
+steps.
+
+:point_right: See the associated :computer: [scripts for local
+use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/align_w_refs_hybpiper2_exons.sh)
+and :woman_technologist: [scripts for cluster (SLURM)
+use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/align_w_refs_hybpiper2_exons_TEMPLATE.sh).
+
+In [Alignment](Alignment.md) and associated scripts cited above, the
+alignment and trimming is run for the extracted exons (`retrieved_exons`
+folder). The exact same steps can be carried out for the extracted
+supercontigs (`retrieved_supercontigs`) and paralogs (`paralogs_all` or
+`paralogs_no_chimeras`). You would just need to change the input
+directories in your scripts.
+
+**IMPORTANT NOTE.** Automating the alignment and cleaning steps do not
+precludes for **alignment errors** to occur. **Always have a look at
+your alignments**. This is how you can detect errors, and tweak with the
+alignment parameters to limit as much as possible the alignment errors.
+E.g. I was first superconfident in ClipKit, but finally decided to go
+with TrimAl because the alignments looked better overall. You can also
+modify the alignments manually to improve the alignments, but this is
+very long and prone to subjective judgement. Programs such as
+[AliView](https://ormbunkar.se/aliview/) or
+[Seaview](https://doua.prabi.fr/software/seaview) can help visualize
+alignments.
 
 ### Phylogenetic reconstruction
 

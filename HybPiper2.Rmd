@@ -406,7 +406,7 @@ hybpiper retrieve_sequences aa -t_aa $reference_fasta_file --sample_names nameli
 
 ## Post-HybPiper files formatting
 
-The .fasta files containing the retrieved sequences have to be slightly modified to be compatible with downstream analyses. In particular, HybPiper incorporates additional informations in the sequences header that we don't need downstream.
+The .fasta files containing the retrieved sequences have to be slightly modified to be compatible with downstream analyses. In particular, HybPiper incorporates additional information in the sequences header that we don't need downstream.
 
 -   for exons sequences
 
