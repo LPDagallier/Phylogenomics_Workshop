@@ -19,7 +19,7 @@ Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repost
 
 **Author**: [Léo-Paul
 Dagallier](https://orcid.org/0000-0002-3270-1544)  
-**Last update**: 2023-09-05
+**Last update**: 2023-10-09
 
 ------------------------------------------------------------------------
 
@@ -132,19 +132,32 @@ use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/hybpiper2_paralogs.sh) and
 :woman_technologist: [scripts for cluster (SLURM)
 use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/hybpiper2_paralogs_TEMPLATE.sh).
 
-##### \> Paralogy resolution with ParaGone
+##### Paralogy resolution with ParaGone
 
 :construction: :construction: :construction:  
-:point_right: See the associated :computer: [scripts for local
-use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/hybpiper2_paralogs.sh) and
-:woman_technologist: [scripts for cluster (SLURM)
-use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/hybpiper2_paralogs_TEMPLATE.sh).
+:point_right: (TO DO) See the associated :computer: [scripts for local
+use]() and :woman_technologist: [scripts for cluster (SLURM) use]().
 :construction: :construction: :construction:
 
 ### Loci filtering
 
-\[:construction: UNDER CONSTRUCTION… :construction:\]  
-See [loci filtering (TO DO)](Loci_filtering.md) for details.
+Loci can be filtered. As we have seen [earlier](Paralogs.md), they can
+be filtered on their putative paralogy status (i.e. completely remove
+putative paralogous loci).
+
+Loci can also be filtered on their **assembly statistics**. Specifically
+they can be filtered on a percentage of samples (N) for which a
+percentage of the length of the loci has been assembled (L). For
+simplicity, let’s call these the **L_N subsets**. For example, a 75_75
+subset will only include those loci that have been recovered for at
+least 75% of their length in 75% of the samples.
+
+Additional lists of loci can be drawn from the paralogy statistics.
+These are exploratory and should be used with caution. They include
+e.g. list of loci with maximum 1 copy (no paralogy at all), or loci with
+a median of 2 copies per sample.
+
+See [loci filtering](Loci_filtering.md) for full details.
 
 ### Alignment
 
