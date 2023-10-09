@@ -151,7 +151,7 @@ ggplot(paralogs_summary_stats)+
   geom_histogram(aes(median))+ theme_minimal()
 ```
 
-<img src="figures/paralogs-stats-plots-1.png" width="100%" />
+<img src="figures/paralogs-stats-plots-1.png" width="50%" />
 
 ``` r
 # Plot mean
@@ -159,7 +159,7 @@ ggplot(paralogs_summary_stats)+
   geom_histogram(aes(mean))+ theme_minimal()
 ```
 
-<img src="figures/paralogs-stats-plots-2.png" width="100%" />
+<img src="figures/paralogs-stats-plots-2.png" width="50%" />
 
 ``` r
 # Plot max
@@ -167,7 +167,7 @@ ggplot(paralogs_summary_stats)+
   geom_histogram(aes(max),binwidth = 1)+ theme_minimal()
 ```
 
-<img src="figures/paralogs-stats-plots-3.png" width="100%" />
+<img src="figures/paralogs-stats-plots-3.png" width="50%" />
 
 ``` r
 # Plot the number of copies for each samples in each locus
@@ -175,7 +175,7 @@ ggplot(paralog_report_long)+
   geom_boxplot(aes(x = Locus, y = N_copy))+ theme_minimal() + theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ```
 
-<img src="figures/paralogs-stats-plots-4.png" width="100%" />
+<img src="figures/paralogs-stats-plots-4.png" width="50%" />
 
 Filter the loci based on their paralogs statistics and export the lists
 into text files.

@@ -9,7 +9,7 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE,
                       eval = FALSE,
                       fig.path  = "figures/",
-                      out.width = "100%")
+                      out.width = "50%")
 ```
 
 **Author**: [Léo-Paul Dagallier](https://github.com/LPDagallier)    
