@@ -115,6 +115,16 @@ and :woman_technologist: scripts for cluster (SLURM) use
 and
 [extraction](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/hybpiper2_extract_TEMPLATE.sh)).
 
+At the end of the HybPiper steps (including the paralogy extraction
+step, see below), you should usually end up with sequences extracted for
+the successful loci in the following directories:
+
+- `retrieved_exons`: extracted exons
+- `retrieved_supercontigs`: extracted exons + (partial) introns
+- `retrieved_aa`: extracted exons translated as amino acids
+- `paralogs_all` and `paralogs_no_chimeras`: extracted multi-copies
+  exons
+
 ### Paralogs assessement and resolution
 
 HybPiper also allow to asses paralogy and to extract putative paralogous
@@ -123,7 +133,7 @@ and decide if these should be discarded, or use
 [ParaGone](https://github.com/chrisjackson-pellicle/ParaGone) to run a
 **phylogenetic aware** paralogy resolution step.
 
-See [**Paralogs document**](Paralogs.md) for more details.
+See [**Paralogs**](Paralogs.md) for more details.
 
 ##### Paralogy assessement with HybPiper
 
@@ -159,10 +169,29 @@ a median of 2 copies per sample.
 
 See [loci filtering](Loci_filtering.md) for full details.
 
+As a general rule, I advise to actually filter the loci after the gene
+trees reconstruction step.
+
 ### Alignment
 
-\[:construction: UNDER CONSTRUCTION… :construction:\]  
-See [Alignment (TO DO)](Alignment.md) for details.
+\[:construction: UNDER CONSTRUCTION… :construction:\]
+
+After extracting the sequences (exons, supercontigs or multicopies
+exons), we need to align them.
+
+Here we’ll use
+[MAFFT](https://mafft.cbrc.jp/alignment/software/algorithms/algorithms.html)
+to align, but other program do exist
+(e.g. [MUSCLE](https://drive5.com/muscle5/manual/commands.html),
+[Clustal](http://www.clustal.org/),
+[MACSE](https://www.agap-ge2pop.org/macse/?menu=releases)).
+
+Sequences can be aligned “naively” or informed by the locus reference
+sequence. As a rule of thumb, I would advise to align with the locus
+reference sequence, because it is conceptually less prone to alignment
+errors.
+
+See [Alignment](Alignment.md) for details on the alignment steps.
 
 ### Phylogenetic reconstruction
 
