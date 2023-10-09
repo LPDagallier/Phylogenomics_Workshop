@@ -111,11 +111,13 @@ will later use to filter the loci.
 
 The `exon_recovery_gradient_samples.png` figure is an easy way to
 illustrate the locus recovery depending the on the length recovered and
-the number of samples for which the locus was recovered:
-![](PHYLOGENY_RECONSTRUCTION/DATA/example_analysis_01/exon_recovery_gradient_samples.png)
-The `L_N_exon_length_density.png` help visualizing the distribution of
-recovered length across the loci (e.g. here for a 50_50 locus):
-![](PHYLOGENY_RECONSTRUCTION/DATA/example_analysis_01/50_50_exon_length_density.png)
+the number of samples for which the locus was recovered: <img
+src="PHYLOGENY_RECONSTRUCTION/DATA/example_analysis_01/exon_recovery_gradient_samples.png"
+style="width:75.0%" /> The `L_N_exon_length_density.png` help
+visualizing the distribution of recovered length across the loci
+(e.g. here for a 50_50 locus): <img
+src="PHYLOGENY_RECONSTRUCTION/DATA/example_analysis_01/50_50_exon_length_density.png"
+style="width:30.0%" />
 
 ## Paralogs subsets
 

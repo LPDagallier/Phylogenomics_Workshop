@@ -81,8 +81,8 @@ source(paste0(path_to_script, "loci_filtering.R"))
 See [here](PHYLOGENY_RECONSTRUCTION/DATA/example_analysis_01/) for all the output examples. The `list_L_N.txt` text files are the list that you will later use to filter the loci.
 
 The `exon_recovery_gradient_samples.png` figure is an easy way to illustrate the locus recovery depending the on the length recovered and the number of samples for which the locus was recovered:
-![](PHYLOGENY_RECONSTRUCTION/DATA/example_analysis_01/exon_recovery_gradient_samples.png)
-The `L_N_exon_length_density.png` help visualizing the distribution of recovered length across the loci (e.g. here for a 50_50 locus): ![](PHYLOGENY_RECONSTRUCTION/DATA/example_analysis_01/50_50_exon_length_density.png)
+![](PHYLOGENY_RECONSTRUCTION/DATA/example_analysis_01/exon_recovery_gradient_samples.png){width=75%}
+The `L_N_exon_length_density.png` help visualizing the distribution of recovered length across the loci (e.g. here for a 50_50 locus): ![](PHYLOGENY_RECONSTRUCTION/DATA/example_analysis_01/50_50_exon_length_density.png){width=30%}
 
 ## Paralogs subsets
 ### Manually identified paralogs
