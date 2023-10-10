@@ -70,15 +70,17 @@ For 'universal' probe sets, see e.g.:
 
 ### Reads cleaning
 The reads obtained from the sequencing have to be cleaned before they can be used for downstream analysis.  
-:point_right: See the [Reads Cleaning](Reads_cleaning.md) document for a detailed workflow.
+🔎 See the [Reads Cleaning](Reads_cleaning.md) document for a detailed workflow.
 
 ### HybPiper 2
 
 HybPiper uses clean reads to create per samples assemblies and to extract the targeted sequences.  
 
-:point_right: See HybPiper's [original tutorial](https://github.com/mossmatters/HybPiper/wiki/Tutorial) for basic use.
+🔎 See HybPiper's [original tutorial](https://github.com/mossmatters/HybPiper/wiki/Tutorial) for basic use.
 
-:point_right: **See [HybPiper2](HybPiper2.md) for advanced HybPiper workflow details**, and associated :computer: scripts for local use ([assembly](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/hybpiper2_assemble.sh) and [extraction](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/hybpiper2_extract.sh)) and :woman_technologist: scripts for cluster (SLURM) use  ([assembly](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/hybpiper2_assemble_TEMPLATE.sh) and [extraction](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/hybpiper2_extract_TEMPLATE.sh)).
+🔎 **See [HybPiper2](HybPiper2.md) for advanced HybPiper workflow details**, and associated:  
+:point_right: :computer: scripts for local use ([assembly](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/hybpiper2_assemble.sh) and [extraction](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/hybpiper2_extract.sh))  
+:point_right: :woman_technologist: scripts for cluster (SLURM) use  ([assembly](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/hybpiper2_assemble_TEMPLATE.sh) and [extraction](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/hybpiper2_extract_TEMPLATE.sh)).
 
 At the end of the HybPiper steps (including the paralogy extraction step, see below), you should usually end up with sequences extracted for the successful loci in the following directories:
 
@@ -91,12 +93,14 @@ At the end of the HybPiper steps (including the paralogy extraction step, see be
 ### Paralogs assessement and resolution
 HybPiper also allow to asses paralogy and to extract putative paralogous sequences. Then you can either assess the putative paralogs one by one and decide if these should be discarded, or use [ParaGone](https://github.com/chrisjackson-pellicle/ParaGone) to run a **phylogenetic aware** paralogy resolution step.
 
-See [**Paralogs**](Paralogs.md) for more details.
+🔎 **See [Paralogs](Paralogs.md) for more details**.
 
-##### Paralogy assessement with HybPiper
-:point_right: See the associated :computer: [scripts for local use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/hybpiper2_paralogs.sh) and :woman_technologist: [scripts for cluster (SLURM) use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/hybpiper2_paralogs_TEMPLATE.sh). 
+#### Paralogy assessement with HybPiper
+See the associated:  
+:point_right: :computer: [scripts for local use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/hybpiper2_paralogs.sh)  
+:point_right: :woman_technologist: [scripts for cluster (SLURM) use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/hybpiper2_paralogs_TEMPLATE.sh)
 
-##### Paralogy resolution with ParaGone
+#### Paralogy resolution with ParaGone
 :construction: :construction: :construction:  
 :point_right: (TO DO) See the associated :computer: [scripts for local use]() and :woman_technologist: [scripts for cluster (SLURM) use](). :construction: :construction: :construction:  
 
@@ -107,7 +111,7 @@ Loci can also be filtered on their **assembly statistics**. Specifically they ca
 
 Additional lists of loci can be drawn from the paralogy statistics. These are exploratory and should be used with caution. They include e.g. list of loci with maximum 1 copy (no paralogy at all), or loci with a median of 2 copies per sample.
 
-See [loci filtering](Loci_filtering.md) for full details.
+🔎 **See [loci filtering](Loci_filtering.md) for full details**.
 
 As a general rule, I advise to actually filter the loci after the gene trees reconstruction step.
 
@@ -123,13 +127,13 @@ Several programs exist to do so, such as [ClipKIT](https://jlsteenwyk.com/ClipKI
 
 Here I present alignment trimming with both ClipKIT and TrimAl.
 
-See [Alignment](Alignment.md) for details on the alignment and trimming steps.
-
-:point_right: See the associated :computer: [scripts for local use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/align_w_refs_hybpiper2_exons.sh) and :woman_technologist: [scripts for cluster (SLURM) use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/align_w_refs_hybpiper2_exons_TEMPLATE.sh). 
+🔎 **See [Alignment](Alignment.md) for details on the alignment and trimming steps**, and see the associated:  
+:point_right: :computer: [script for local use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/align_w_refs_hybpiper2_exons.sh)  
+:point_right: :woman_technologist: [script for cluster (SLURM) use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/align_w_refs_hybpiper2_exons_TEMPLATE.sh). 
 
 In [Alignment](Alignment.md) and associated scripts cited above, the alignment and trimming is run for the extracted exons (`retrieved_exons` folder). The exact same steps can be carried out for the extracted supercontigs (`retrieved_supercontigs`) and paralogs (`paralogs_all` or `paralogs_no_chimeras`). You would just need to change the input directories in your scripts.
 
-**IMPORTANT NOTE.** Automating the alignment and cleaning steps do not precludes for **alignment errors** to occur. **Always have a look at your alignments**. This is how you can detect errors, and tweak with the alignment parameters to limit as much as possible the alignment errors. E.g. I was first superconfident in ClipKit, but finally decided to go with TrimAl because the alignments looked better overall. You can also modify the alignments manually to improve the alignments, but this is very long and prone to subjective judgement. Programs such as [AliView](https://ormbunkar.se/aliview/) or [Seaview](https://doua.prabi.fr/software/seaview) can help visualize alignments.
+**IMPORTANT NOTE.** Automating the alignment and cleaning steps do not precludes for **alignment errors** to occur. **Always have a look at your alignments**. This is how you can detect errors, and tweak with the alignment parameters to limit as much as possible the alignment errors. For example, I was first super-confident in ClipKit, but finally decided to go with TrimAl because the alignments looked better with it. You can also modify the alignments manually to improve the alignments, but this is very long and prone to subjectivity. Programs such as [AliView](https://ormbunkar.se/aliview/) or [Seaview](https://doua.prabi.fr/software/seaview) can help visualize alignments.
 
 ### Phylogenetic reconstruction
 [:construction: UNDER CONSTRUCTION... :construction:]  

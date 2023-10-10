@@ -2,7 +2,7 @@ Paralogs assessement
 ================
 
 **Author**: [Léo-Paul Dagallier](https://github.com/LPDagallier)  
-**Last update**: 2023-09-05
+**Last update**: 2023-10-10
 
 ------------------------------------------------------------------------
 
@@ -94,9 +94,10 @@ concatenating the loci into a supermatrix (concatenation approach). An
 alternative to discarding the paralogous loci, is to “resolve” the
 paralogy (see below).
 
-:point_right: See also the associated :computer: [scripts for local
-use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/hybpiper2_paralogs.sh) and
-:woman_technologist: [scripts for cluster (SLURM)
+See also the associated:  
+:point_right: :computer: [script for local
+use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/hybpiper2_paralogs.sh)  
+:point_right: :woman_technologist: [script for cluster (SLURM)
 use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/hybpiper2_paralogs_TEMPLATE.sh).
 
 # Paralogy resolution - Orthology inference
