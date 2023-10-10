@@ -57,11 +57,11 @@ Targets low-copy elements of the genome, ideally single-copy orthologous loci.
 The downstream analyses need that we use a set of target sequences.
 
 #### Melastomataceae
-:warning: For **Melastomataceae** a probe set was designed ([Jantzen et al. 2020](https://bsapubs.onlinelibrary.wiley.com/doi/abs/10.1002/aps3.11345)), but due to several concerns, it was cleaned and updated (Dagallier & Michelangeli, in press.). 
-:point_right: See [here](https://github.com/LPDagallier/Clean_Melasto_probe_set) for more details. :point_left:
+⚠️ For **Melastomataceae** a probe set was designed ([Jantzen et al. 2020](https://bsapubs.onlinelibrary.wiley.com/doi/abs/10.1002/aps3.11345)), but due to several concerns, it was cleaned and updated (Dagallier & Michelangeli, in press.). 
+👉 **See [here](https://github.com/LPDagallier/Clean_Melasto_probe_set) for more details**.
 
 From this clean and updated probe set, it is also recommended to remove the "outlier" loci and to further [remove short sequences]( (https://github.com/mossmatters/HybPiper/wiki/Troubleshooting,-common-issues,-and-recommendations#14-fixing-and-filtering-your-target-file)).  
-:sparkles: The **final clean probe set** (outlier loci and short sequences removed) can be found in the present repo: [`.FNA` file](PHYLOGENY_RECONSTRUCTION/PROBE_SET_CLEAN_v5.FNA) and [`.FAA` file](PHYLOGENY_RECONSTRUCTION/PROBE_SET_CLEAN_v5_prot.FAA). :sparkles:
+✨ The **final clean probe set** (outlier loci and short sequences removed) can be found in the present repo: [`.FNA` file](PHYLOGENY_RECONSTRUCTION/PROBE_SET_CLEAN_v5.FNA) and [`.FAA` file](PHYLOGENY_RECONSTRUCTION/PROBE_SET_CLEAN_v5_prot.FAA). ✨
 
 #### Others
 For 'universal' probe sets, see e.g.:  
@@ -79,8 +79,8 @@ HybPiper uses clean reads to create per samples assemblies and to extract the ta
 🔎 See HybPiper's [original tutorial](https://github.com/mossmatters/HybPiper/wiki/Tutorial) for basic use.
 
 🔎 **See [HybPiper2](HybPiper2.md) for advanced HybPiper workflow details**, and associated:  
-:point_right: :computer: scripts for local use ([assembly](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/hybpiper2_assemble.sh) and [extraction](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/hybpiper2_extract.sh))  
-:point_right: :woman_technologist: scripts for cluster (SLURM) use  ([assembly](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/hybpiper2_assemble_TEMPLATE.sh) and [extraction](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/hybpiper2_extract_TEMPLATE.sh)).
+👉 💻 scripts for local use ([assembly](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/hybpiper2_assemble.sh) and [extraction](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/hybpiper2_extract.sh))  
+👉 👩‍💻 scripts for cluster (SLURM) use  ([assembly](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/hybpiper2_assemble_TEMPLATE.sh) and [extraction](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/hybpiper2_extract_TEMPLATE.sh)).
 
 At the end of the HybPiper steps (including the paralogy extraction step, see below), you should usually end up with sequences extracted for the successful loci in the following directories:
 
@@ -97,12 +97,12 @@ HybPiper also allow to asses paralogy and to extract putative paralogous sequenc
 
 #### Paralogy assessement with HybPiper
 See the associated:  
-:point_right: :computer: [scripts for local use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/hybpiper2_paralogs.sh)  
-:point_right: :woman_technologist: [scripts for cluster (SLURM) use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/hybpiper2_paralogs_TEMPLATE.sh)
+👉 💻 [scripts for local use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/hybpiper2_paralogs.sh)  
+👉 👩‍💻 [scripts for cluster (SLURM) use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/hybpiper2_paralogs_TEMPLATE.sh)
 
 #### Paralogy resolution with ParaGone
 :construction: :construction: :construction:  
-:point_right: (TO DO) See the associated :computer: [scripts for local use]() and :woman_technologist: [scripts for cluster (SLURM) use](). :construction: :construction: :construction:  
+👉 (TO DO) See the associated 💻 [scripts for local use]() and 👩‍💻 [scripts for cluster (SLURM) use](). :construction: :construction: :construction:  
 
 ### Loci filtering
 Loci can be filtered. As we have seen [earlier](Paralogs.md), they can be filtered on their putative paralogy status (i.e. completely remove putative paralogous loci).
@@ -128,22 +128,33 @@ Several programs exist to do so, such as [ClipKIT](https://jlsteenwyk.com/ClipKI
 Here I present alignment trimming with both ClipKIT and TrimAl.
 
 🔎 **See [Alignment](Alignment.md) for details on the alignment and trimming steps**, and see the associated:  
-:point_right: :computer: [script for local use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/align_w_refs_hybpiper2_exons.sh)  
-:point_right: :woman_technologist: [script for cluster (SLURM) use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/align_w_refs_hybpiper2_exons_TEMPLATE.sh). 
+👉 💻 [script for local use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/align_w_refs_hybpiper2_exons.sh)  
+👉 👩‍💻 [script for cluster (SLURM) use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/align_w_refs_hybpiper2_exons_TEMPLATE.sh). 
 
 In [Alignment](Alignment.md) and associated scripts cited above, the alignment and trimming is run for the extracted exons (`retrieved_exons` folder). The exact same steps can be carried out for the extracted supercontigs (`retrieved_supercontigs`) and paralogs (`paralogs_all` or `paralogs_no_chimeras`). You would just need to change the input directories in your scripts.
 
 **IMPORTANT NOTE.** Automating the alignment and cleaning steps do not precludes for **alignment errors** to occur. **Always have a look at your alignments**. This is how you can detect errors, and tweak with the alignment parameters to limit as much as possible the alignment errors. For example, I was first super-confident in ClipKit, but finally decided to go with TrimAl because the alignments looked better with it. You can also modify the alignments manually to improve the alignments, but this is very long and prone to subjectivity. Programs such as [AliView](https://ormbunkar.se/aliview/) or [Seaview](https://doua.prabi.fr/software/seaview) can help visualize alignments.
 
 ### Phylogenetic reconstruction
-[:construction: UNDER CONSTRUCTION... :construction:]  
+
+Once the sequences are aligned in multiple sequence alignments (MSAs), the phylogenetic reconstruction can be undertaken.
+
+It can be done using the gene trees approach and/or using the concatenation approach.
 
 #### Gene trees approach
-#### Concatenation approach
+The gene trees approach seeks to first infer a tree separately for each locus, and then summarize the gene trees in a species tree using a pseudo-coalescent model implemented in ASTRAL (or related programs/algorithms). This approach accommodates incomplete lineage sorting (ILS).
 
+🔎 See [Gene Trees Approach](Gene_trees_approach.md) for more details.
+
+#### Concatenation approach
+🚧🚧🚧 🚧🚧🚧
+The concatenation approach seeks to first concatenate the MSAs of all the loci into a single MSA (or 'supermatrix'), and then infer the species tree from the supermatrix.
+
+🔎 See [Concatenation Approach](Concatenation_approach.md) for more details.
+🚧🚧🚧 🚧🚧🚧
 ## Genome skimming
-[:construction: UNDER CONSTRUCTION... :construction:]  
-[to be completed...]
+🚧🚧🚧 [to be completed...] 🚧🚧🚧 
+
 
 ***
 

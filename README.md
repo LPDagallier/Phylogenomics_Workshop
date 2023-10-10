@@ -66,20 +66,20 @@ The downstream analyses need that we use a set of target sequences.
 
 #### Melastomataceae
 
-:warning: For **Melastomataceae** a probe set was designed ([Jantzen et
+⚠️ For **Melastomataceae** a probe set was designed ([Jantzen et
 al. 2020](https://bsapubs.onlinelibrary.wiley.com/doi/abs/10.1002/aps3.11345)),
 but due to several concerns, it was cleaned and updated (Dagallier &
-Michelangeli, in press.). :point_right: See
+Michelangeli, in press.). 👉 **See
 [here](https://github.com/LPDagallier/Clean_Melasto_probe_set) for more
-details. :point_left:
+details**.
 
 From this clean and updated probe set, it is also recommended to remove
 the “outlier” loci and to further [remove short
 sequences]((https://github.com/mossmatters/HybPiper/wiki/Troubleshooting,-common-issues,-and-recommendations#14-fixing-and-filtering-your-target-file)).  
-:sparkles: The **final clean probe set** (outlier loci and short
-sequences removed) can be found in the present repo: [`.FNA`
+✨ The **final clean probe set** (outlier loci and short sequences
+removed) can be found in the present repo: [`.FNA`
 file](PHYLOGENY_RECONSTRUCTION/PROBE_SET_CLEAN_v5.FNA) and [`.FAA`
-file](PHYLOGENY_RECONSTRUCTION/PROBE_SET_CLEAN_v5_prot.FAA). :sparkles:
+file](PHYLOGENY_RECONSTRUCTION/PROBE_SET_CLEAN_v5_prot.FAA). ✨
 
 #### Others
 
@@ -107,11 +107,11 @@ basic use.
 
 🔎 **See [HybPiper2](HybPiper2.md) for advanced HybPiper workflow
 details**, and associated:  
-:point_right: :computer: scripts for local use
+👉 💻 scripts for local use
 ([assembly](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/hybpiper2_assemble.sh)
 and
 [extraction](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/hybpiper2_extract.sh))  
-:point_right: :woman_technologist: scripts for cluster (SLURM) use
+👉 👩‍💻 scripts for cluster (SLURM) use
 ([assembly](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/hybpiper2_assemble_TEMPLATE.sh)
 and
 [extraction](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/hybpiper2_extract_TEMPLATE.sh)).
@@ -139,17 +139,17 @@ and decide if these should be discarded, or use
 #### Paralogy assessement with HybPiper
 
 See the associated:  
-:point_right: :computer: [scripts for local
+👉 💻 [scripts for local
 use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/hybpiper2_paralogs.sh)  
-:point_right: :woman_technologist: [scripts for cluster (SLURM)
+👉 👩‍💻 [scripts for cluster (SLURM)
 use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/hybpiper2_paralogs_TEMPLATE.sh)
 
 #### Paralogy resolution with ParaGone
 
 :construction: :construction: :construction:  
-:point_right: (TO DO) See the associated :computer: [scripts for local
-use]() and :woman_technologist: [scripts for cluster (SLURM) use]().
-:construction: :construction: :construction:
+👉 (TO DO) See the associated 💻 [scripts for local use]() and 👩‍💻
+[scripts for cluster (SLURM) use](). :construction: :construction:
+:construction:
 
 ### Loci filtering
 
@@ -204,9 +204,9 @@ Here I present alignment trimming with both ClipKIT and TrimAl.
 
 🔎 **See [Alignment](Alignment.md) for details on the alignment and
 trimming steps**, and see the associated:  
-:point_right: :computer: [script for local
+👉 💻 [script for local
 use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_local/align_w_refs_hybpiper2_exons.sh)  
-:point_right: :woman_technologist: [script for cluster (SLURM)
+👉 👩‍💻 [script for cluster (SLURM)
 use](PHYLOGENY_RECONSTRUCTION/SCRIPTS_cluster/align_w_refs_hybpiper2_exons_TEMPLATE.sh).
 
 In [Alignment](Alignment.md) and associated scripts cited above, the
@@ -230,15 +230,30 @@ alignments.
 
 ### Phylogenetic reconstruction
 
-\[:construction: UNDER CONSTRUCTION… :construction:\]
+Once the sequences are aligned in multiple sequence alignments (MSAs),
+the phylogenetic reconstruction can be undertaken.
+
+It can be done using the gene trees approach and/or using the
+concatenation approach.
 
 #### Gene trees approach
 
+The gene trees approach seeks to first infer a tree separately for each
+locus, and then summarize the gene trees in a species tree using a
+pseudo-coalescent model implemented in ASTRAL (or related
+programs/algorithms). This approach accommodates incomplete lineage
+sorting (ILS).
+
+🔎 See [Gene Trees Approach](Gene_trees_approach.md) for more details.
+
 #### Concatenation approach
 
-## Genome skimming
+🚧🚧🚧 🚧🚧🚧 The concatenation approach seeks to first concatenate the
+MSAs of all the loci into a single MSA (or ‘supermatrix’), and then
+infer the species tree from the supermatrix.
 
-\[:construction: UNDER CONSTRUCTION… :construction:\]  
-\[to be completed…\]
+🔎 See [Concatenation Approach](Concatenation_approach.md) for more
+details. 🚧🚧🚧 🚧🚧🚧 \## Genome skimming 🚧🚧🚧 \[to be completed…\]
+🚧🚧🚧
 
 ------------------------------------------------------------------------

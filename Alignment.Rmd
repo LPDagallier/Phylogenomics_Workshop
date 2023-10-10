@@ -24,13 +24,12 @@ Sequences can be aligned "naively" or "informed" by the locus reference sequence
 
 Here I'll present only the "informed" method, but the extra steps this method requires can easily be removed if you want to go with the "naive" method.
 
-## Multi-sequences alignment
+## Multiple sequences alignment (MSA)
 ### Define the paths and variables
 
 - for the inputs:
 ```{bash}
 analysis_ID="my_analysis_ID"
-path_to_dir_in="<base_directory>/DATA_ANALYSES/PHYLOGENY_RECONSTRUCTION/DATA";
 path_to_dir_in="<base_directory>/DATA_ANALYSES/PHYLOGENY_RECONSTRUCTION/JOBS_OUTPUTS/"$analysis_ID"_hybpiper2_extract/retrieved_exons/formatted_fastas";
 
 path_to_ref="<base_directory>/DATASETS/PHYLOGENOMICS/target_references"
@@ -43,13 +42,13 @@ step_ID="hybpiper2_exons_align_w_refs"
 path_to_dir_out="<base_directory>/DATA_ANALYSES/PHYLOGENY_RECONSTRUCTION/JOBS_OUTPUTS/$analysis_ID"_"$step_ID"/";
 ```
 
--   temporary directory for local users:
+- temporary directory for local users:
 
 ```{bash}
 path_to_tmp=$path_to_dir_out
 ```
 
--   temporary directory for cluster users: depends on the cluster manager and its setup (please see with your cluster documentation), e.g. for SLURM on HiperGator:
+- temporary directory for cluster users: depends on the cluster manager and its setup (please see with your cluster documentation), e.g. for SLURM on HiperGator:
 
 ```{bash}
 path_to_tmp=$SLURM_TMPDIR
