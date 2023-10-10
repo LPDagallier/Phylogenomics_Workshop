@@ -2,7 +2,7 @@ Alignment
 ================
 
 **Author**: [Léo-Paul Dagallier](https://github.com/LPDagallier)  
-**Last update**: 2023-10-09
+**Last update**: 2023-10-10
 
 ------------------------------------------------------------------------
 
@@ -206,7 +206,7 @@ rm *_w_refs.FNA
 ## Alignment trimming
 
 After the sequence have been aligned, poorly aligned regions have to be
-trimmed from multi-sequence alignments (MSAs).
+trimmed from multiple sequence alignments (MSAs).
 
 Several programs exist to do so, such as
 [ClipKIT](https://jlsteenwyk.com/ClipKIT/index.html),

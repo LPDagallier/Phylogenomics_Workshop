@@ -32,10 +32,7 @@ Here I'll present only the "informed" method, but the extra steps this method re
 analysis_ID="my_analysis_ID"
 path_to_dir_in="<base_directory>/DATA_ANALYSES/PHYLOGENY_RECONSTRUCTION/DATA";
 path_to_dir_in="<base_directory>/DATA_ANALYSES/PHYLOGENY_RECONSTRUCTION/JOBS_OUTPUTS/"$analysis_ID"_hybpiper2_extract/retrieved_exons/formatted_fastas";
-```
 
-- for the reference target file. Note that this has to be the **nucleotide** version of the target file (not amino acids).
-```{bash}
 path_to_ref="<base_directory>/DATASETS/PHYLOGENOMICS/target_references"
 reference_fasta_file="target_reference.FNA"
 ```
@@ -162,7 +159,7 @@ rm *_w_refs.FNA
 ```
 
 ## Alignment trimming
-After the sequence have been aligned, poorly aligned regions have to be trimmed from multi-sequence alignments (MSAs).
+After the sequence have been aligned, poorly aligned regions have to be trimmed from multiple sequence alignments (MSAs).
 
 Several programs exist to do so, such as [ClipKIT](https://jlsteenwyk.com/ClipKIT/index.html), [TrimAl](http://trimal.cgenomics.org/trimal) or [Gblocks](https://home.cc.umanitoba.ca/~psgendb/doc/Castresana/Gblocks_documentation.html). These programs usually trim the alignments based on the quality of the alignment at a given position. Other approaches such as [HmmCleaner](https://bioinformaticshome.com/tools/msa/descriptions/HmmCleaner.html) remove poorly aligned regions on a sequence by sequence basis. Both approaches can be combined.
 
