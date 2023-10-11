@@ -294,7 +294,7 @@ output_log="astral_"$folder"_L_N_bs10.log"
 echo "astral -t 2 -i $path_to_input$input_file -o $path_to_out$output_file 2> $path_to_out$output_log"
 ```
 
-Similarly as above, writing manually the command for every subset can be cumbersome, so let's write it into a loop to run ASTRAL on all the files in the folder:
+Similarly as above, writing manually the command for every subset can be cumbersome, so let's write a loop to run ASTRAL on all the files in the folder:
 ```{bash}
 path_to_input=$path_to_jobs_out/$folder/trees/
 cd $path_to_input
@@ -308,7 +308,71 @@ done
 ```
 
 #### Root the tree(s)
+ASTRAL inferes unrooted species tree, so we need to root the tree. This can be done in different ways, we'll here use the unix-based program [phyx](https://github.com/FePhyFoFum/phyx). As an alternative you can also root the trees in R (e.g. function `root()` in the package `ape`).
+
+Go to the directory where ASTRAL trees are stored and define a variable `TREES` containing all the ASTRAL tree files in the directory.
+```{bash}
+cd $path_to_out
+TREES=astral*.tree
+```
+
+Root all the trees in a loop using `pxrr`.
+```{bash}
+for t in $TREES
+do
+echo $t
+pxrr -t $t -g outgroup_sample1,outgroup_sample2 > rooted.$t
+done
+```
+- `-t` defines the tree file name
+- `-g` defines the name(s) of the sample(s) to be set as outgroup(s); it can be a list of samples
+
 #### Visualize the trees and export figures
+Once trees are rooted, you may want to download them locally (in case you were running ASTRAL, phyx, etc. on a cluster). You can visualize the trees with [any visualization software](https://en.wikipedia.org/wiki/List_of_phylogenetic_tree_visualization_software), such as [FigTree](http://tree.bio.ed.ac.uk/software/figtree/) or [Dendroscope](https://uni-tuebingen.de/fakultaeten/mathematisch-naturwissenschaftliche-fakultaet/fachbereiche/informatik/lehrstuehle/algorithms-in-bioinformatics/software/dendroscope/).
+
+In R, you can use your own function, or use the `plot_astral()` function that is available here in the [`plot_astral_tree.R`](PHYLOGENY_RECONSTRUCTION/R/plot_astral_tree.R) script. This function is a wrapper of different functions including the `geom_tree()` function (package `ggtree`), and allows to plot different branch support, different branch length configurations, and to rename the tips in your tree. The plots are directly saved into a .pdf file.
+
+First set your R working directory to the path where you have your ASTRAL trees.
+```{r warning=FALSE}
+setwd(dir = "<base_directory>/DATA_ANALYSES/PHYLOGENY_RECONSTRUCTION/DATA/my_analysis_ID")
+```
+
+Load relevant packages.
+```{r warning=FALSE}
+library(treeio)
+library(ggplot2)
+library(ggtree)
+library(ggimage)
+library(tidyr)
+```
+
+Create a list of the files of the trees you want to plot.
+```{r warning=FALSE}
+trees_list <- list.files(pattern = "rooted.*.tree$")
+```
+
+If you want to rename the tip labels in your tree, you must prepare a table with old names in one columna and the corresponding new names in another column (see e.g. the [`tips_rename.txt`](PHYLOGENY_RECONSTRUCTION/DATA/example_analysis_01/tips_rename.txt) text file).
+
+```{r warning=FALSE}
+tiplabels <- read.table(file = "<base_directory>/DATA_ANALYSES/PHYLOGENY_RECONSTRUCTION/DATA/my_analysis_ID/tips_rename.txt", col.names = c("OLD", "NEW"))
+```
+
+Define the path to the script and source the script. This will load the `plot_astral()` function into your R environment.
+```{r warning=FALSE}
+path_to_plot_astral_script <- "<base_directory>DATA_ANALYSES/PHYLOGENY_RECONSTRUCTION/plot_astral_tree.R"
+source(path_to_plot_astral_script)
+```
+
+Loop over all the tree file names in the `trees_list` vector defined earlier.
+```{r warning=FALSE}
+for (tree_file in trees_list){
+  print(tree_file)
+  plot_astral(tree_file, rename = T, tiplabels = tiplabels, annotations = "LPP")
+}
+```
+`plot_astral()` has several options, see details in the [`plot_astral_tree.R`](PHYLOGENY_RECONSTRUCTION/R/plot_astral_tree.R) script.
+
+**Important note:** the trees are expected to be annotated with the `-t 2` option in ASTRAL. Specifically, it is expected to have node support named 'pp1' (for local posterior probabilities, LPP) and 'q1','q2' and 'q3' (for quartet scores, QS).
 
 ## ASTRAL-weighted
 🚧🚧🚧
