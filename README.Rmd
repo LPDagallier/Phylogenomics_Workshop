@@ -142,16 +142,17 @@ Once the sequences are aligned in multiple sequence alignments (MSAs), the phylo
 It can be done using the gene trees approach and/or using the concatenation approach.
 
 #### Gene trees approach
-The gene trees approach seeks to first infer a tree separately for each locus, and then summarize the gene trees in a species tree using a pseudo-coalescent model implemented in ASTRAL (or related programs/algorithms). This approach accommodates incomplete lineage sorting (ILS).
+In the gene trees approach we will first infer a tree for each locus separately, and then summarize the gene trees in a species tree using a pseudo-coalescent model implemented in ASTRAL (or related programs/algorithms). This approach accommodates incomplete lineage sorting (ILS).
 
 🔎 See [Gene Trees Approach](Gene_trees_approach.md) for more details.
 
 #### Concatenation approach
 🚧🚧🚧 🚧🚧🚧
-The concatenation approach seeks to first concatenate the MSAs of all the loci into a single MSA (or 'supermatrix'), and then infer the species tree from the supermatrix.
+In the concatenation approach we will first concatenate the MSAs of all the loci into a single MSA (or 'supermatrix'), and then infer the species tree from the supermatrix.
 
 🔎 See [Concatenation Approach](Concatenation_approach.md) for more details.
 🚧🚧🚧 🚧🚧🚧
+
 ## Genome skimming
 🚧🚧🚧 [to be completed...] 🚧🚧🚧 
 

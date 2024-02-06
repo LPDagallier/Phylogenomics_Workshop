@@ -19,7 +19,7 @@ Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repost
 
 **Author**: [Léo-Paul
 Dagallier](https://orcid.org/0000-0002-3270-1544)  
-**Last update**: 2023-10-11
+**Last update**: 2023-10-18
 
 ------------------------------------------------------------------------
 
@@ -238,8 +238,8 @@ concatenation approach.
 
 #### Gene trees approach
 
-The gene trees approach seeks to first infer a tree separately for each
-locus, and then summarize the gene trees in a species tree using a
+In the gene trees approach we will first infer a tree for each locus
+separately, and then summarize the gene trees in a species tree using a
 pseudo-coalescent model implemented in ASTRAL (or related
 programs/algorithms). This approach accommodates incomplete lineage
 sorting (ILS).
@@ -248,12 +248,15 @@ sorting (ILS).
 
 #### Concatenation approach
 
-🚧🚧🚧 🚧🚧🚧 The concatenation approach seeks to first concatenate the
-MSAs of all the loci into a single MSA (or ‘supermatrix’), and then
+🚧🚧🚧 🚧🚧🚧 In the concatenation approach we will first concatenate
+the MSAs of all the loci into a single MSA (or ‘supermatrix’), and then
 infer the species tree from the supermatrix.
 
 🔎 See [Concatenation Approach](Concatenation_approach.md) for more
-details. 🚧🚧🚧 🚧🚧🚧 \## Genome skimming 🚧🚧🚧 \[to be completed…\]
-🚧🚧🚧
+details. 🚧🚧🚧 🚧🚧🚧
+
+## Genome skimming
+
+🚧🚧🚧 \[to be completed…\] 🚧🚧🚧
 
 ------------------------------------------------------------------------
