@@ -375,7 +375,11 @@ for (tree_file in trees_list){
 **Important note:** the trees are expected to be annotated with the `-t 2` option in ASTRAL. Specifically, it is expected to have node support named 'pp1' (for local posterior probabilities, LPP) and 'q1','q2' and 'q3' (for quartet scores, QS).
 
 ## ASTRAL-weighted
-🚧🚧🚧
+The steps to inferring species tree with ASTRAL-weighted are exactly the same as for ASTRAL, except that you don't need to collapse branches with low support.
+
+
+🚧🚧🚧 Under construction, for more details see: https://github.com/chaoszhang/ASTER
+
 
 ## ASTRAL-Pro2
 🚧🚧🚧

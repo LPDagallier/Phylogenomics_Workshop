@@ -2,7 +2,7 @@ Concatenation Approach
 ================
 
 **Author**: [Léo-Paul Dagallier](https://github.com/LPDagallier)  
-**Last update**: 2023-10-18
+**Last update**: 2024-02-06
 
 ------------------------------------------------------------------------
 
@@ -17,4 +17,19 @@ need to be concatenated into a single supermatrix prior to RAxML
 inference. With IQ-TREE, we can directly input all the MSAs files that
 will be concatenated internally by IQ-TREE.
 
+🚧🚧🚧
+
+🚧🚧🚧
+
 ## Infer tree with IQ-TREE
+
+🚧🚧🚧
+
+🚧🚧🚧
+
+Under construction, more coming soon. (feel free to send me an email or
+open an issue to pressure me)
+
+Draft:
+
+To concatenate matrices: <https://github.com/marekborowiec/AMAS/>

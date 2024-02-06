@@ -2,7 +2,7 @@ Gene Trees Approach
 ================
 
 **Author**: [Léo-Paul Dagallier](https://github.com/LPDagallier)  
-**Last update**: 2023-10-11
+**Last update**: 2024-02-06
 
 ------------------------------------------------------------------------
 
@@ -503,7 +503,12 @@ support named ‘pp1’ (for local posterior probabilities, LPP) and
 
 ## ASTRAL-weighted
 
-🚧🚧🚧
+The steps to inferring species tree with ASTRAL-weighted are exactly the
+same as for ASTRAL, except that you don’t need to collapse branches with
+low support.
+
+🚧🚧🚧 Under construction, for more details see:
+<https://github.com/chaoszhang/ASTER>
 
 ## ASTRAL-Pro2
 
